@@ -1,0 +1,26 @@
+const path = require('path');
+
+module.exports = {
+    entry: path.resolve(process.cwd(), 'src', 'index.ts'),
+    mode: 'production',
+    module: {
+        rules: [
+          {
+            test: /\.(ts|tsx|js|jsx)$/,
+            exclude: /node_modules/,
+            use: ['babel-loader']
+          }
+        ]
+      },
+      resolve: {
+        extensions: ['*', '.js', '.jsx', '.ts', '.tsx']
+      },
+    output: {
+        path: path.resolve(process.cwd(), 'build'),
+        filename: 'index.js'
+    },
+    target: 'node',
+    node: {
+        global: false,
+    }
+};

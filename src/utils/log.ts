@@ -13,5 +13,5 @@ export function l(m: unknown, level: 'info' | 'warn' | 'error' = 'info') {
     default:
       color = 'green';
   }
-  console[level](chalk[color](m));
+  console[level](`${chalk[color](`[${Date.now()}]:${m}`)}`);
 }

@@ -15,16 +15,20 @@ export type EmbedOptions = {
 
 export function embed(pageString: string, options: EmbedOptions) {
   let html: string;
+  let error: Error | undefined;
+
   try {
     l('retrieving html template...');
     html = fs.readFileSync(
       path.resolve(process.cwd(), 'html', 'prod.template.html'),
       { encoding: 'utf-8' }
     );
-    l('html is ' + html);
   } catch (e: any) {
     l(e, 'error');
+    error = (e as Error);
     throw e;
+  } finally {
+    l(`operation ended: status "${error ? "failed" : "successful"}"`, error ? 'error' : 'info');
   }
 
   if (options.headTags && options.headTags?.length > 0) {
