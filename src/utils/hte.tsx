@@ -11,6 +11,7 @@ export type HeadTagConfig = {
 
 export type EmbedOptions = {
   headTags?: HeadTagConfig[];
+  bundleName: string;
 };
 
 export function embed(pageString: string, options: EmbedOptions) {
@@ -36,8 +37,13 @@ export function embed(pageString: string, options: EmbedOptions) {
     for (const metaTag of options.headTags) {
       metaTagString += `<meta name="${metaTag.name}" content="${metaTag.content}">`;
     }
-    html = html.replace('<!-- __head_mounting_point__ -->', metaTagString);
+    html = html.replace('<!-- __head_mount__ -->', metaTagString);
+  } else {
+    html = html.replace('<!-- __head_mount__ -->', '')
   }
+
+  const scriptTag = `<script src="${options.bundleName}.bundle.js" defer></script>`;
+  html = html.replace('<!-- __client_js_mount__ -->', scriptTag);
 
   return html.replace('<div id="production-root"></div>', pageString);
 }
