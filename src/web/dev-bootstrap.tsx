@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LandingPage } from './pages';
 
+import './styles/global.css';
+
 function DevelopmentClientApp() {
   return (
     <BrowserRouter>

@@ -13,10 +13,8 @@ expressServer.use(express.json());
 expressServer.use(trace());
 
 expressServer.use(
-    express.static(
-        path.resolve(process.cwd(), 'build', 'static')
-    )
-)
+  express.static(path.resolve(process.cwd(), 'build', 'static'))
+);
 
 expressServer.get('/', HomeMarketplaceHandler);
 

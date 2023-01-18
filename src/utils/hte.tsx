@@ -26,10 +26,13 @@ export function embed(pageString: string, options: EmbedOptions) {
     );
   } catch (e: any) {
     l(e, 'error');
-    error = (e as Error);
+    error = e as Error;
     throw e;
   } finally {
-    l(`operation ended: status "${error ? "failed" : "successful"}"`, error ? 'error' : 'info');
+    l(
+      `operation ended: status "${error ? 'failed' : 'successful'}"`,
+      error ? 'error' : 'info'
+    );
   }
 
   if (options.headTags && options.headTags?.length > 0) {
@@ -39,7 +42,7 @@ export function embed(pageString: string, options: EmbedOptions) {
     }
     html = html.replace('<!-- __head_mount__ -->', metaTagString);
   } else {
-    html = html.replace('<!-- __head_mount__ -->', '')
+    html = html.replace('<!-- __head_mount__ -->', '');
   }
 
   const scriptTag = `<script src="${options.bundleName}.bundle.js" defer></script>`;
