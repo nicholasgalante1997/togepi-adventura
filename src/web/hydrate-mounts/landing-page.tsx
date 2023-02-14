@@ -5,3 +5,6 @@ import { LandingPage } from '../pages';
 function hydrateHomeMarketplace() {
   hydrateRoot(document.getElementById('production-root')!, <LandingPage />);
 }
+
+
+hydrateHomeMarketplace();

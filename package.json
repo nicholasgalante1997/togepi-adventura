@@ -9,6 +9,7 @@
     "copy:assets": "cp src/web/styles/global.css build/static/index.css",
     "dev:client": "webpack serve --config dev-config/webpack.dev.js",
     "dev:server": "ts-node src/index.ts",
+    "build": "yarn build:pages && yarn build:server && yarn copy:assets",
     "fmt": "prettier --write src/",
     "gh": "git log --graph --oneline",
     "start": "node build/index.js"

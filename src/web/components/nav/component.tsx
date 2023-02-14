@@ -169,8 +169,11 @@ function ExtendedActivePurchaseBar(){
 }
 
 function getExtendedContent(activeTab: ServiceTab){
-  const ld: Record<ServiceTab, JSX.Element | JSX.Element[]> = {
-    grade: <ExtendedActiveGradeBar />
+  const ld: Record<ServiceTab, JSX.Element | JSX.Element[] | React.ReactNode | React.ReactNode[]> = {
+    grade: <ExtendedActiveGradeBar />,
+    purchase: null,
+    sell: null,
+    trade: null
   };
   return ld[activeTab];
 }

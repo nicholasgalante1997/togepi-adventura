@@ -6,6 +6,6 @@ import { LandingPage } from '../../web/pages';
 
 export function HomeMarketplaceHandler(req: Request, res: Response) {
   res.send(
-    embed(renderToString(<LandingPage />), { bundleName: 'landingPage' })
+    embed(LandingPage, { bundleName: 'landingPage' })
   );
 }
