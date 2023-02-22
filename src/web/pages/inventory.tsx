@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav } from '../components/nav/component';
 
-export function LandingPage() {
+export function CardInventoryPage() {
   return (
     <React.StrictMode>
       <div className="page">

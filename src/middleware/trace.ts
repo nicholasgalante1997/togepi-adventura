@@ -3,8 +3,8 @@ import { l } from '../utils';
 
 export function trace() {
   return function traceRunner(req: Request, res: Response, next: NextFunction) {
-    l(`beckoned path: ${req.path}`);
-    l(`requester headers ${req.headers}`);
+    l(`hit path: ${req.path}`);
+    l(`Status: ${req.statusCode}`)
     l(`timestamp: ${Date.now()}`);
     next();
   };

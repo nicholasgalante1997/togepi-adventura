@@ -1,4 +1,11 @@
-// html template engine
+/**
+ * @abstract
+ * HTML Templating Engine
+ * This function accepts two arguments: A React Component that you wish to dehydrate into 
+ * 'static' markup, and an options object that assists in driving the Component configuration.
+ * The function loads a public template html file - html.production.template, and then 
+ * embeds the result of dehydrating the component into a mounting element within the 
+ */
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -15,6 +22,7 @@ export type HeadTagConfig = {
 export type EmbedOptions = {
   headTags?: HeadTagConfig[];
   bundleName: string;
+  props?: Record<string, any>;
 };
 
 export function embed(Component: React.ComponentType, options: EmbedOptions) {
@@ -31,7 +39,7 @@ export function embed(Component: React.ComponentType, options: EmbedOptions) {
       { encoding: 'utf-8' }
     );
     l('Dehydrating styled-components on server...');
-    pageString = renderToString(sheet.collectStyles(<Component />));
+    pageString = renderToString(sheet.collectStyles(<Component {...(options.props ? options.props : {})} />));
     const styleTags = sheet.getStyleTags();
     html = html.replace('<!-- __style_mount__ -->', styleTags);
   } catch (e: any) {
