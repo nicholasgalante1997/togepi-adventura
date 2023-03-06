@@ -2,10 +2,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Source Sans Pro', system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-    sans-serif;
-    background: white;
+  font-family: 'Poppins', sans-serif;
+  background: #cc0000;
 }
 
 .page {
@@ -13,6 +11,28 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+}
+
+.fixed-nav {
+  isolation: isolate;
+  position: fixed;
+  top: 24px;
+  right: 48px;
+  z-index: 1;
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.fixed-nav:hover {
+  box-shadow: rgba(0, 0, 0, 0.64) 0px 3px 8px;
 }

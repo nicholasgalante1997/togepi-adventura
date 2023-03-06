@@ -1,0 +1,14 @@
+{
+  "locale": "en-US",
+  "public": {
+    "strings": {
+      "landingPage_title": {
+        "value": "Placeholder Trading Card Company",
+        "note": "need to determine a title for this website"
+      }
+    },
+    "assets": {
+      "landingPage_trainerWithPikachu": "lp_trainer.png"
+    }
+  }
+}

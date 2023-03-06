@@ -15,7 +15,7 @@ const ExtendedNavShell = styled.div`
   width: 100%;
   margin: 0;
   padding: 12px;
-  background: #0075BE;
+  background: #0075be;
   border-bottom: 1px solid #847c7c;
   display: flex;
   flex-direction: row;
@@ -51,10 +51,10 @@ const LogoSlotLeft = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 3px solid #0075BE;
+  border: 3px solid #0075be;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  background-color: #FFCC00;
+  background-color: #ffcc00;
 `;
 
 const LogoSlotRight = styled.div`
@@ -64,7 +64,7 @@ const LogoSlotRight = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #0075BE;
+  background: #0075be;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 `;
@@ -72,7 +72,7 @@ const LogoSlotRight = styled.div`
 const LogoText = styled.h6`
   font-family: 'Secular One', sans-serif;
   font-weight: bold;
-  color: #0075BE;
+  color: #0075be;
   font-size: 30px;
   margin-block-start: 0.04em;
   margin-block-end: 0.04em;
@@ -80,7 +80,7 @@ const LogoText = styled.h6`
 
 const LogoSubText = styled.p`
   font-family: 'Secular One', sans-serif;
-  color: #FFCC00;
+  color: #ffcc00;
   font-size: 22px;
   margin-block-start: 0.04em;
   margin-block-end: 0.04em;
@@ -142,10 +142,62 @@ const ExtendedColumn = styled.div`
   & div {
     margin-top: 4px;
   }
-  
+
   & h3 {
-    color: #FFCC00;
+    color: #ffcc00;
   }
+`;
+
+const OverlayShell = styled.div`
+  min-height: 220px;
+  min-width: 200px;
+  height: 260px;
+  width: 260px;
+  border-radius: 4px;
+  background: #fff;
+  padding: 8px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+const OverlayOption = styled.a`
+  font-weight: 600;
+  font-size: 18px;
+  display: block;
+  margin-block-start: 0.4rem;
+  margin-block-end: 0.4rem;
+  cursor: pointer;
+  transition-property: font-size, font-weight;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+
+  &:hover {
+    transition-property: font-size, font-weight;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    font-size: 14px;
+    font-weight: 500;
+  }
+`;
+
+const OverlayOptionSubtext = styled.p`
+  font-size: 12px;
+  font-weight: 400px;
+  color: rgba(0, 0, 0, 0.25);
+  margin-block-start: 0.02em;
+  margin-block-end: 0.2em;
+`;
+
+export const UserSectionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
 `
 
 export {
@@ -160,5 +212,8 @@ export {
   ServiceLink,
   ServicesShell,
   UserRegistryShell,
-  ExtendedColumn
+  ExtendedColumn,
+  OverlayShell,
+  OverlayOption,
+  OverlayOptionSubtext,
 };

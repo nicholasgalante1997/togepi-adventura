@@ -1,10 +1,10 @@
 /**
  * @abstract
  * HTML Templating Engine
- * This function accepts two arguments: A React Component that you wish to dehydrate into 
+ * This function accepts two arguments: A React Component that you wish to dehydrate into
  * 'static' markup, and an options object that assists in driving the Component configuration.
- * The function loads a public template html file - html.production.template, and then 
- * embeds the result of dehydrating the component into a mounting element within the 
+ * The function loads a public template html file - html.production.template, and then
+ * embeds the result of dehydrating the component into a mounting element within the
  */
 
 import React from 'react';
@@ -31,7 +31,7 @@ export function embed(Component: React.ComponentType, options: EmbedOptions) {
   let error: Error | undefined;
 
   const sheet = new ServerStyleSheet();
-  
+
   try {
     l('retrieving html template...');
     html = fs.readFileSync(
@@ -39,7 +39,11 @@ export function embed(Component: React.ComponentType, options: EmbedOptions) {
       { encoding: 'utf-8' }
     );
     l('Dehydrating styled-components on server...');
-    pageString = renderToString(sheet.collectStyles(<Component {...(options.props ? options.props : {})} />));
+    pageString = renderToString(
+      sheet.collectStyles(
+        <Component {...(options.props ? options.props : {})} />
+      )
+    );
     const styleTags = sheet.getStyleTags();
     html = html.replace('<!-- __style_mount__ -->', styleTags);
   } catch (e: any) {
@@ -67,5 +71,8 @@ export function embed(Component: React.ComponentType, options: EmbedOptions) {
   const scriptTag = `<script src="${options.bundleName}.bundle.js" defer></script>`;
   html = html.replace('<!-- __client_js_mount__ -->', scriptTag);
 
-  return html.replace('<div id="production-root"></div>', `<div id="production-root">${pageString}</div>`);
+  return html.replace(
+    '<div id="production-root"></div>',
+    `<div id="production-root">${pageString}</div>`
+  );
 }

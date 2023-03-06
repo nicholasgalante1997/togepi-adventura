@@ -18,7 +18,8 @@ module.exports = {
         https: false,
         historyApiFallback: {
             index: 'index.html'
-        }
+        },
+        static: ['assets']
     },
     module: {
         rules: [
