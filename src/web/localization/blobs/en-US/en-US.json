@@ -3,8 +3,12 @@
   "public": {
     "strings": {
       "landingPage_title": {
-        "value": "Placeholder Trading Card Company",
+        "value": "Pokemon Trading Card Company",
         "note": "need to determine a title for this website"
+      },
+      "landingPage_subtitle": {
+        "value": "Where Elite Pokemon Trainers Come to Wheel and Deal",
+        "note": "updated last on 3/6"
       }
     },
     "assets": {

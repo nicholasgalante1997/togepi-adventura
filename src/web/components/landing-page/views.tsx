@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const LPContainer = styled.div`
-  margin: 32px;
+  box-sizing: border-box;
   background: inherit;
   padding: 4px;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   overflow: hidden;
+  height: 90vh;
 `;
 
 export const LPTrainerPokemonImageContainer = styled.div`
@@ -17,6 +18,10 @@ export const LPTrainerPokemonImageContainer = styled.div`
   margin: 0;
   padding: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const LPTrainerPokemonImage = styled.img`
@@ -33,8 +38,14 @@ export const CallToActionContainer = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 `;
 
 export const Title = styled.h1``;
+
+export const Subtitle = styled.p`
+  font-size: 16px;
+  font-weight: 600;
+  font-variant: small-caps;
+`;

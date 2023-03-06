@@ -17,11 +17,11 @@ export function OptionsSection() {
   return (
     <div>
       {serviceTabs.map((tab) => (
-        <>
-          <OverlayOption
-            onMouseEnter={() => setActiveTab(tab)}
-            onMouseLeave={() => setActiveTab(undefined)}
-          >
+        <div
+          onMouseEnter={() => setActiveTab(tab)}
+          onMouseLeave={() => setActiveTab(undefined)}
+        >
+          <OverlayOption focus={activeTab === tab}>
             {titleCase(tab)}
           </OverlayOption>
           {activeTab === tab && (
@@ -29,7 +29,7 @@ export function OptionsSection() {
               {optionsSubtextMap[activeTab]}
             </OverlayOptionSubtext>
           )}
-        </>
+        </div>
       ))}
     </div>
   );

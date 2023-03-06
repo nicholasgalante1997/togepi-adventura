@@ -4,6 +4,7 @@ import {
   LPContainer,
   LPTrainerPokemonImage,
   LPTrainerPokemonImageContainer,
+  Subtitle,
   Title,
 } from './views';
 import { getAsset, getString } from '../../contexts';
@@ -14,6 +15,7 @@ const URL_PREFIX = getStaticResourceUrl();
 
 export function LandingPageComponent() {
   const titleOrUndefined = getString(PAGE_PREFIX + '_title');
+  const subtitleOrUndefined = getString(PAGE_PREFIX + '_subtitle');
   const trainerImgAssetOrUndefined = getAsset(
     PAGE_PREFIX + '_trainerWithPikachu'
   );
@@ -35,7 +37,8 @@ export function LandingPageComponent() {
         />
       </LPTrainerPokemonImageContainer>
       <CallToActionContainer>
-        <Title>The Pokemon Trading Card Company</Title>
+        <Title>{titleOrUndefined}</Title>
+        <Subtitle>{subtitleOrUndefined}</Subtitle>
       </CallToActionContainer>
     </LPContainer>
   );
