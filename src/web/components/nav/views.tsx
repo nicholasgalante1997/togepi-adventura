@@ -40,7 +40,7 @@ const OverlayOptionSubtext = styled.p`
   margin-block-end: 0.2em;
 `;
 
-export const UserSectionContainer = styled.div`
+const UserSectionContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -49,4 +49,27 @@ export const UserSectionContainer = styled.div`
   justify-content: space-between;
 `;
 
-export { OverlayShell, OverlayOption, OverlayOptionSubtext };
+const AvatarSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-grow: 1;
+`;
+
+const DispatchUserMutationSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+`;
+
+export {
+  OverlayShell,
+  OverlayOption,
+  OverlayOptionSubtext,
+  UserSectionContainer,
+  AvatarSection,
+  DispatchUserMutationSection,
+};

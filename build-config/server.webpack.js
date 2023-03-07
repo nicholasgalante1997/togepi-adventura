@@ -1,4 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
+
+const { EnvironmentPlugin } = webpack;
 
 module.exports = {
     entry: path.resolve(process.cwd(), 'src', 'index.ts'),
@@ -22,5 +25,6 @@ module.exports = {
     target: 'node',
     node: {
         global: false,
-    }
+    },
+    plugins: [new EnvironmentPlugin({ ...process.env })],
 };

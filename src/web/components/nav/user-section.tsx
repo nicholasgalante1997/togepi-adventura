@@ -1,6 +1,15 @@
 import React from 'react';
-import { UserSectionContainer } from './views';
+import {
+  UserSectionContainer,
+  AvatarSection,
+  DispatchUserMutationSection,
+} from './views';
 
 export function UserSection() {
-  return <UserSectionContainer></UserSectionContainer>;
+  return (
+    <UserSectionContainer>
+      <AvatarSection></AvatarSection>
+      <DispatchUserMutationSection></DispatchUserMutationSection>
+    </UserSectionContainer>
+  );
 }
