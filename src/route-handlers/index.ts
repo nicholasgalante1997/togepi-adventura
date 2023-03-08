@@ -3,5 +3,5 @@ import { pokemonCardShowHandler } from './card-show';
 
 export const ROUTING_HANDLER_MAP = {
   lp: landingPageRouteHandler,
-  card: pokemonCardShowHandler
+  card: pokemonCardShowHandler,
 } as const;

@@ -3,20 +3,21 @@ import { hydrateRoot } from 'react-dom/client';
 import { CardShowPage } from '../pages';
 
 function hydrateCardShowPage() {
-  const dataStateComponent: HTMLDivElement | null = document.querySelector('#hydrate-el');
-  if (!dataStateComponent) {
-    window && window.location.assign('/500');
-    return;
-  }
-  const propsAsString = dataStateComponent?.dataset?.componentstate;
-  if (!propsAsString) {
-    window && window.location.assign('/500');
+  const componentStateEl: HTMLDivElement | null = document.querySelector('#component-state-mount');
+  if (!componentStateEl) {
+    /** handle error */
     return;
   }
 
-  document.removeChild(dataStateComponent);
-  const props = JSON.parse(propsAsString!)
-  hydrateRoot(document.getElementById('production-root')!, <CardShowPage {...props} />);
+  const innerText = componentStateEl.innerText;
+  console.log({ innerText });
+
+  const cardState = JSON.parse(innerText);
+
+  hydrateRoot(
+    document.getElementById('production-root')!,
+    <CardShowPage card={cardState.props.card} />
+  );
 }
 
 hydrateCardShowPage();

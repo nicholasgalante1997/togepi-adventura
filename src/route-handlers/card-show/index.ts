@@ -13,7 +13,13 @@ export async function pokemonCardShowHandler(req: Request, res: Response) {
 
   try {
     const axres = await cardService.getCard(pkId);
-    res.send(embed(CardShowPage, { bundleName: 'cardShow', props: { card: axres } }));
+    console.log({ axres });
+    res.send(
+      embed(CardShowPage, {
+        bundleName: 'cardShow',
+        props: { card: axres.data },
+      })
+    );
   } catch (e) {
     l((e as Error).message, 'error');
     res.send(embed(Error500Page, { bundleName: '500' }));
