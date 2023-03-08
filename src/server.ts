@@ -17,5 +17,6 @@ expressServer.use(
 );
 
 expressServer.get('/', ROUTING_HANDLER_MAP.lp);
+expressServer.get('/cards/:pkId', ROUTING_HANDLER_MAP.card);
 
 export const server = createServer(expressServer);

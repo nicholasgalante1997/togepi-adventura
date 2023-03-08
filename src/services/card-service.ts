@@ -27,4 +27,6 @@ class CardService extends TCGService {
     }
 }
 
-export { CardService };
+const cardService = new CardService();
+
+export { cardService };

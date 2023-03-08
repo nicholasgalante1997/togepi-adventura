@@ -25,7 +25,7 @@ export type EmbedOptions = {
   props?: Record<string, any>;
 };
 
-export function embed(Component: React.ComponentType, options: EmbedOptions) {
+export function embed(Component: React.ComponentType<any>, options: EmbedOptions) {
   let html: string;
   let pageString: string;
   let error: Error | undefined;
@@ -68,7 +68,14 @@ export function embed(Component: React.ComponentType, options: EmbedOptions) {
     html = html.replace('<!-- __head_mount__ -->', '');
   }
 
-  const scriptTag = `<script src="${options.bundleName}.bundle.js" defer></script>`;
+  if (options.props && Object.keys(options.props).length > 0) {
+    const dataTag = `<div id="hydrate-el" data-componentState='${JSON.stringify({ props: options.props })}'></div>`;
+    html = html.replace('<!-- __data_state_mount__ -->', dataTag);
+  } else {
+    html = html.replace('<!-- __data_state_mount__ -->', '');
+  }
+
+  const scriptTag = `<script src="/${options.bundleName}.bundle.js" defer></script>`;
   html = html.replace('<!-- __client_js_mount__ -->', scriptTag);
 
   return html.replace(
