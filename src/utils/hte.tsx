@@ -72,7 +72,9 @@ export function embed(
   }
 
   if (options.props && Object.keys(options.props).length > 0) {
-    const componentStateElement = `<div id="component-state-mount">${JSON.stringify({ props: options.props })}</div>`;
+    const componentStateElement = `<div id="component-state-mount">${JSON.stringify(
+      { props: options.props }
+    )}</div>`;
     html = html.replace('<!-- __data_state_mount__ -->', componentStateElement);
   } else {
     html = html.replace('<!-- __data_state_mount__ -->', '');

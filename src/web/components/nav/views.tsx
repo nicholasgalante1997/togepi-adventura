@@ -14,6 +14,7 @@ const OverlayShell = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  z-index: 3;
 
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.64) 0px 3px 8px;

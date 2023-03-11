@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getShadowColorOffType } from '../../utils';
 
 const BannerContainer = styled.div`
   display: flex;
@@ -14,7 +15,6 @@ const BannerContainer = styled.div`
 `;
 
 const CardImageContainer = styled.div`
-  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -23,24 +23,46 @@ const CardImageContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  height: 320px;
+  height: 440px;
   width: auto;
   margin-left: 64px;
   object-fit: cover;
 `;
 
+const SetImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 140px;
+`
+
+const SetImage = styled.img<{ zIndex: number }>`
+  height: 140px;
+  width: auto;
+  object-fit: cover;
+  z-index: ${props => props.zIndex};
+`;
+
 const CardInfoContainer = styled.div`
-  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding-right: 32px;
+  padding-left: 32px;
 `;
 
-const CardTitle = styled.h1``;
-const CardInfoItem = styled.p``;
+const CardTitle = styled.h1<{ types: string[] }>`
+  margin-block-start: 0.25rem;
+  margin-block-end: 0.4rem;
+  text-shadow: 2px 2px ${props => getShadowColorOffType(props.types)};
+`;
+
+const CardInfoItem = styled.p`
+  margin-block-start: 0.25rem;
+  margin-block-end: 0.25rem;
+`;
 
 export {
   BannerContainer,
@@ -49,4 +71,6 @@ export {
   CardInfoContainer,
   CardInfoItem,
   CardTitle,
+  SetImageContainer,
+  SetImage
 };

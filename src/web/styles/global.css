@@ -45,3 +45,9 @@ body {
   height: 0;
   width: 0;
 }
+
+.info-type {
+  margin-left: 4px;
+  margin-right: 4px;
+  text-align: center;
+}

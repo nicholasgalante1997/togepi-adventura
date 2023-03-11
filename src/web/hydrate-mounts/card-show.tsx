@@ -3,14 +3,15 @@ import { hydrateRoot } from 'react-dom/client';
 import { CardShowPage } from '../pages';
 
 function hydrateCardShowPage() {
-  const componentStateEl: HTMLDivElement | null = document.querySelector('#component-state-mount');
+  const componentStateEl: HTMLDivElement | null = document.querySelector(
+    '#component-state-mount'
+  );
   if (!componentStateEl) {
     /** handle error */
     return;
   }
 
   const innerText = componentStateEl.innerText;
-  console.log({ innerText });
 
   const cardState = JSON.parse(innerText);
 
@@ -18,6 +19,8 @@ function hydrateCardShowPage() {
     document.getElementById('production-root')!,
     <CardShowPage card={cardState.props.card} />
   );
+
+  componentStateEl.remove();
 }
 
 hydrateCardShowPage();
