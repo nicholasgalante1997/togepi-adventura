@@ -2,14 +2,13 @@ import React from 'react';
 import { HamburgerMenuIcon } from './hamburger-menu.icon';
 import { NavOverlay } from './overlay';
 
-export type ServiceTab = 'grade' | 'trade' | 'purchase' | 'sell' | 'cards';
+export type ServiceTab = 'grade' | 'sell' | 'search cards' | 'deck builder';
 
 export const serviceTabs: readonly ServiceTab[] = [
   'grade',
-  'purchase',
-  'trade',
   'sell',
-  'cards',
+  'search cards',
+  'deck builder',
 ] as const;
 
 export function FixedNav() {

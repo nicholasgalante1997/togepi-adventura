@@ -5,11 +5,18 @@ import { ServiceTab, serviceTabs } from './component';
 import { titleCase } from '../../utils';
 
 const optionsSubtextMap: Record<ServiceTab, string> = {
-  cards: 'View your card inventory.',
+  'search cards': 'Search for cards to purchase or claim.',
+  'deck builder':
+    'Use ChatGPT-4 to assist you in building a deck/deck strategies',
   grade: 'Submit cards for grading.',
-  purchase: 'Purchase singles or bulk.',
   sell: 'Sell your bulk or singles.',
-  trade: 'Trade with others.',
+};
+
+const optionsNavigationMap: Record<ServiceTab, string> = {
+  'search cards': '/cards/search',
+  'deck builder': '/deck/builder',
+  grade: '/g/submit',
+  sell: '/cards/sell',
 };
 
 export function OptionsSection() {
@@ -21,7 +28,11 @@ export function OptionsSection() {
           onMouseEnter={() => setActiveTab(tab)}
           onMouseLeave={() => setActiveTab(undefined)}
         >
-          <OverlayOption focus={activeTab === tab}>
+          <OverlayOption
+            href={optionsNavigationMap[tab]}
+            target="_self"
+            focus={activeTab === tab}
+          >
             {titleCase(tab)}
           </OverlayOption>
           {activeTab === tab && (

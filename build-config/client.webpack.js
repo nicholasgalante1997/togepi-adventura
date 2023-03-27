@@ -92,5 +92,10 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '.json']
     },
-    plugins: [new EnvironmentPlugin({ ...process.env })],
+    plugins: [
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
+      new EnvironmentPlugin({ ...process.env }),
+    ],
 };
