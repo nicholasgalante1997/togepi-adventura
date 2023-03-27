@@ -14,23 +14,22 @@ const pokemonImageMap: Record<PokemonName, string> = {
     'https://static.pokemonpets.com/images/monsters-images-800-800/175-Togepi.webp',
   typhlosion:
     'https://archives.bulbagarden.net/media/upload/thumb/1/13/0157Typhlosion.png/1200px-0157Typhlosion.png',
+  totodile: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/158.png',
 };
 
 export function Footer(props: { pokemon: PokemonName }) {
   return (
     <FooterContainer pokemon={props.pokemon}>
-      <h5>
-        Johto Trading Co. &copy;
-      </h5>
+      <h5>Johto Trading Co. &copy;</h5>
       <p>
-      This page was inspired by{' '}
+        This page was inspired by{' '}
         <span
           style={{
             fontSize: '18px',
             fontWeight: 600,
             color: getPokemonPaletteByPokemonName(props.pokemon).starkContrast,
             textTransform: 'capitalize',
-            fontVariant: 'small-caps'
+            fontVariant: 'small-caps',
           }}
         >
           {props.pokemon}

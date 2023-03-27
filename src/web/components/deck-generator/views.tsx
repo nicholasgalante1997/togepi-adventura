@@ -7,7 +7,7 @@ const DeckGenPageContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   min-height: 800px;
@@ -19,23 +19,28 @@ const DeckGenPageContainer = styled.div`
 `;
 
 const ChatGPTBannerDisclaimer = styled.div`
-    background-color: ${new ColorScale(0, 100, [getPokemonPaletteByPokemonName('gengar').backgroundColor, '#000000']).getColor(30).toHexString()};
-    border-radius: 6px;
-    border: 1px solid black;
-    padding: 8px;
-    min-height: 80px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    color: #fff; 
-    & > p {
-        color: rgba(255,255,255,0.5);
-        font-size: 14px;
-        line-height: 1.15;
-    }
-`
+  background-color: ${new ColorScale(0, 100, [
+    getPokemonPaletteByPokemonName('gengar').backgroundColor,
+    '#000000',
+  ])
+    .getColor(30)
+    .toHexString()};
+  border-radius: 6px;
+  border: 1px solid black;
+  padding: 8px;
+  min-height: 80px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: #fff;
+  & > p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    line-height: 1.15;
+  }
+`;
 
 const DeckGenInputContainer = styled.div`
   margin-top: 24px;
@@ -106,5 +111,5 @@ export {
   DeckGenInput,
   DeckGenInputContainer,
   DeckGenButton,
-  ChatGPTBannerDisclaimer
+  ChatGPTBannerDisclaimer,
 };

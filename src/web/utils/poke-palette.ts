@@ -4,7 +4,8 @@ export type PokemonName =
   | 'growlithe'
   | 'typhlosion'
   | 'togepi'
-  | 'rayquaza';
+  | 'rayquaza'
+  | 'totodile';
 
 export function getPokemonPaletteByPokemonName(pokemon: PokemonName) {
   const pokemonColorMap: Record<PokemonName, { [x: string]: string }> = {
@@ -43,6 +44,12 @@ export function getPokemonPaletteByPokemonName(pokemon: PokemonName) {
       primaryTextColor: '#ffffff',
       starkContrast: '#f6de00',
       starkContrastOffset: '#9c2952',
+    },
+    totodile: {
+      backgroundColor: '#3183c5',
+      primaryTextColor: '#ffffff',
+      starkContrast: '#cd4120',
+      starkContrastOffset: '#ffc552',
     },
   };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Button,
+  ButtonContainer,
   CallToActionContainer,
   LPContainer,
   LPTrainerPokemonImage,
@@ -39,6 +41,22 @@ export function LandingPageComponent() {
       <CallToActionContainer>
         <Title>{titleOrUndefined}</Title>
         <Subtitle>{subtitleOrUndefined}</Subtitle>
+        <ButtonContainer>
+          <Button>
+            Deck Builder{' '}
+            <span
+              style={{
+                fontWeight: 300,
+                color: 'rgba(255,255,255,0.7)',
+                fontSize: '10px',
+              }}
+            >
+              Powered By ChatGPT
+            </span>
+          </Button>
+          <Button>Shop Cards</Button>
+          <Button>Claim Cards / Tokens</Button>
+        </ButtonContainer>
       </CallToActionContainer>
     </LPContainer>
   );
