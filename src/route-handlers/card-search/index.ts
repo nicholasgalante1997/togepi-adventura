@@ -5,7 +5,7 @@ import { CardSearchPage } from '../../web/pages';
 export async function cardSearchPageHandler(req: Request, res: Response) {
   res.send(
     embed(CardSearchPage, {
-      bundleName: 'deckGenerator',
+      bundleName: 'cardSearch',
     })
   );
 }

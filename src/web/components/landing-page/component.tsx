@@ -30,6 +30,7 @@ export function LandingPageComponent() {
       window && window.location.replace('');
     }
   }, [titleOrUndefined, trainerImgAssetOrUndefined]);
+
   return (
     <LPContainer>
       <LPTrainerPokemonImageContainer>

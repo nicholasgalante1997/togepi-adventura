@@ -47,6 +47,7 @@ export const CardSearchContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     min-height: 160px;
+    height: 200px;
     justify-content: space-evenly;
 `
 

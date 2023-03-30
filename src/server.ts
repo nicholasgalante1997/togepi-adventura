@@ -16,8 +16,9 @@ expressServer.use(
   express.static(path.resolve(process.cwd(), 'build', 'static'))
 );
 
-expressServer.get('/', ROUTING_HANDLER_MAP.lp);
-expressServer.get('/cards/:pkId', ROUTING_HANDLER_MAP.card);
+expressServer.get('/', ROUTING_HANDLER_MAP.landingPage);
+expressServer.get('/cards/search', ROUTING_HANDLER_MAP.cardSearch);
+expressServer.get('/card/:pkId', ROUTING_HANDLER_MAP.cardShow);
 expressServer.get('/deck/builder', ROUTING_HANDLER_MAP.deckBuilder);
 
 export const server = createServer(expressServer);
