@@ -8,6 +8,7 @@
     "build:server": "webpack --config build-config/server.webpack.js",
     "copy:assets": "cp src/web/styles/global.css build/static/index.css && cp -R assets/ build/static/",
     "dev:server": "npm run build:pages && npm run copy:assets && ts-node src/index.ts",
+    "dev:client": "webpack serve --config build-config/development.webpack.js",
     "build": "yarn build:pages && yarn build:server && yarn copy:assets",
     "fmt": "prettier --write src/",
     "gh": "git log --graph --oneline",
@@ -16,6 +17,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@nickgdev/porygon-metlib": "^1.2.2",
     "axios": "^1.3.4",
     "chalk": "4.1.2",
     "color-scales": "^3.0.2",

@@ -77,7 +77,7 @@ export function DeckGeneratorPageComponent() {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'flex-start',
-          textAlign: 'start'
+          textAlign: 'start',
         }}
       >
         <ChatGPTBannerDisclaimer>

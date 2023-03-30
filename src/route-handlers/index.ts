@@ -7,5 +7,5 @@ export const ROUTING_HANDLER_MAP = {
   landingPage: landingPageRouteHandler,
   cardShow: pokemonCardShowHandler,
   deckBuilder: deckBuilderPageHandler,
-  cardSearch: cardSearchPageHandler
+  cardSearch: cardSearchPageHandler,
 } as const;

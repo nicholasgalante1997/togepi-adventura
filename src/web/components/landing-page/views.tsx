@@ -15,6 +15,7 @@ export const LPContainer = styled.div`
   overflow: visible;
   min-height: 600px;
   max-height: 800px;
+  width: 100%;
   background-color: ${getPokemonPaletteByPokemonName('totodile')
     .backgroundColor};
 `;
