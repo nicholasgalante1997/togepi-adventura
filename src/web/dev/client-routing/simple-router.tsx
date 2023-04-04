@@ -4,75 +4,23 @@ import { Error404Page } from '../../pages';
 export type Route = {
   path: string;
   component: JSX.Element;
-  state?: RouteState;
 };
 
 export type SimpleClientRouterProps = {
   routes: Route[];
 };
 
-type Path = string;
-type RouteState = Record<string, any>;
-
-export type LocationContext = {
-  path: string;
-  state?: RouteState;
-  back(): void;
-  push(p: Path, s?: RouteState): void;
-  reload(): void;
-};
-
-const defaultLocationContext = {
-  path: '',
-  back() {},
-  push(p: Path, s?: RouteState) {},
-  reload() {},
-};
-
-const RoutingContext = React.createContext<LocationContext>(
-  defaultLocationContext
-);
-export const useRouteCtx = () => React.useContext(RoutingContext);
-
 export function SimpleClientRouter(props: SimpleClientRouterProps) {
   const [path, setPath] = React.useState<string>(
     window?.location?.pathname ?? '/'
   );
-  const [state, setState] = React.useState<RouteState | undefined>(
-    window.history.state ?? undefined
-  );
-  const [history, setHistory] = React.useState<
-    { path: Path; state?: RouteState }[]
-  >([{ path: window.location.pathname }]);
 
   React.useEffect(() => {
-    function preventNaturalNavigationInDev(e: PopStateEvent) {
-      e.preventDefault();
+    if (window.location.pathname !== path) {
+      setPath(window.location.pathname);
     }
-    window.addEventListener('popstate', preventNaturalNavigationInDev);
-    return window.removeEventListener(
-      'popstate',
-      preventNaturalNavigationInDev
-    );
-  }, []);
+  }, [window.location.pathname]);
 
-  function push(p: Path, s?: RouteState): void {
-    setPath(p);
-    setState(s);
-    setHistory((prev) => [...(prev ? prev : []), { path: p, state: s }]);
-    window.history.replaceState(s ?? {}, '', p);
-  }
-
-  function back() {
-    if (history && history?.length > 2) {
-      const historyEntry = history[history.length - 2];
-      push(historyEntry.path, historyEntry.state);
-    }
-  }
-
-  function reload() {
-    window.location.reload();
-  }
 
   const render = props.routes.find((r) => r.path === path)?.component;
 
@@ -81,8 +29,8 @@ export function SimpleClientRouter(props: SimpleClientRouterProps) {
   }
 
   return (
-    <RoutingContext.Provider value={{ path, state, back, reload, push }}>
+    <div className="page">
       {render}
-    </RoutingContext.Provider>
+    </div>
   );
 }

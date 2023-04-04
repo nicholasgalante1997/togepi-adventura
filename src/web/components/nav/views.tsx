@@ -7,7 +7,7 @@ const OverlayShell = styled.div`
   height: 260px;
   width: 260px;
   border-radius: 4px;
-  background: #ffde00;
+  background: #000000;
   padding: 8px;
   margin-top: 6px;
   display: flex;
@@ -31,12 +31,13 @@ const OverlayOption = styled.a<{ focus: boolean }>`
   transition-property: font-size, font-weight;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
+  color: white;
 `;
 
 const OverlayOptionSubtext = styled.p`
   font-size: 12px;
   font-weight: 400px;
-  color: rgba(0, 0, 0, 0.44);
+  color: #D3D3D3;
   margin-block-start: 0.02em;
   margin-block-end: 0.2em;
 `;

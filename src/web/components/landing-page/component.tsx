@@ -13,7 +13,6 @@ import { getAsset, getString } from '../../contexts';
 import { getStaticResourceUrl } from '../../utils';
 
 const PAGE_PREFIX = 'landingPage' as const;
-const URL_PREFIX = getStaticResourceUrl();
 
 export function LandingPageComponent() {
   const titleOrUndefined = getString(PAGE_PREFIX + '_title');
@@ -35,7 +34,7 @@ export function LandingPageComponent() {
     <LPContainer>
       <LPTrainerPokemonImageContainer>
         <LPTrainerPokemonImage
-          src={URL_PREFIX + trainerImgAssetOrUndefined}
+          src={'/' + trainerImgAssetOrUndefined}
           alt="Pokemon Trainer w Pikachu"
         />
       </LPTrainerPokemonImageContainer>

@@ -11,7 +11,9 @@ module.exports = {
     devServer: {
         port: 3001,
         https: false,
-        historyApiFallback: true,
+        historyApiFallback: {
+            index: 'index.html'
+        },
         open: true,
         allowedHosts: 'all',
         static: ['assets']
@@ -56,7 +58,8 @@ module.exports = {
       }),
       new EnvironmentPlugin({ ...process.env }),
       new HtmlWebpackPlugin({
-        template: path.resolve(process.cwd(), 'src', 'web', 'dev', 'dev.html')
+        template: path.resolve(process.cwd(), 'src', 'web', 'dev', 'dev.html'),
+        filename: 'index.html'
       })
     ],
 };

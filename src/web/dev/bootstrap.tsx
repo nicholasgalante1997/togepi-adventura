@@ -9,11 +9,7 @@ import {
   Error500Page,
 } from '../pages';
 
-import {
-  SimpleClientRouter,
-  useRouteCtx,
-  Route,
-} from './client-routing/simple-router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import '../styles/global.css';
 
@@ -41,7 +37,7 @@ const mockCard = {
       text: '',
     },
   ],
-  weaknesses: [{ type: 'Lightning', value: '×2' }],
+  weaknesses: [{ type: 'Lightning', value: 'x2' }],
   resistances: [{ type: 'Fighting', value: '-30' }],
   retreatCost: ['Colorless'],
   convertedRetreatCost: 1,
@@ -115,7 +111,7 @@ const mockCard = {
   },
 };
 
-const routes: Route[] = [
+const routes = [
   {
     path: '/',
     component: <LandingPage />,
@@ -125,7 +121,7 @@ const routes: Route[] = [
     component: <CardSearchPage />,
   },
   {
-    path: '/card/swsh10-120',
+    path: '/card/:cardId',
     component: <CardShowPage card={mockCard} />,
   },
   {
@@ -144,7 +140,15 @@ const routes: Route[] = [
 
 function mountApp(){
     const root = createRoot(document.getElementById('devroot')!);
-    root.render(<SimpleClientRouter routes={routes} />);
+    root.render(
+      <BrowserRouter>
+        <Switch>
+          {routes.map(r => <Route path={r.path}>
+            {r.component}
+          </Route>)}
+        </Switch>
+      </BrowserRouter>
+    );
 };
 
 mountApp();
