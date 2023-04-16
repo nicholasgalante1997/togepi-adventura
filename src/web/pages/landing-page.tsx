@@ -1,8 +1,8 @@
 import React from 'react';
-import { LandingPageComponent } from '../components/landing-page';
+import { LandingPageComponent } from '../components/LandingPage';
 import { LocalizedContextProvider } from '../contexts';
-import { FixedNav } from '../components/nav';
-import { Footer } from '../components/footer';
+import { FixedNav } from '../components/FixedNav';
+import { Footer } from '../components/Footer';
 
 export function LandingPage() {
   return (

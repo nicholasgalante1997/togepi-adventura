@@ -1,5 +1,5 @@
 import React from 'react';
-import { FixedNav } from '../components/nav/component';
+import { FixedNav } from '../components/FixedNav/component';
 
 export function CardInventoryPage() {
   return (

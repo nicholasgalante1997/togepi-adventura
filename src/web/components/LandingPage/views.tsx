@@ -13,7 +13,7 @@ export const LPContainer = styled.div`
   align-items: center;
   flex-grow: 1;
   overflow: visible;
-  min-height: 600px;
+  min-height: 400px;
   width: 100%;
   background-color: ${getPokemonPaletteByPokemonName('totodile')
     .backgroundColor};
@@ -100,4 +100,36 @@ export const Button = styled.button`
   &:active {
     color: rgba(255, 255, 255, 0.7);
   }
+`;
+
+export const WidgetTwoContainer = styled.div`
+  width: 100%;
+  height: 400px;
+  background: white;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding: 0px;
+  margin: 0px;
+`;
+
+export const TextContainer = styled.div`
+  width: 40%;
+  background: inherit;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
+
+export const CardContainer = styled.div`
+  width: 60%;
+  background: inherit;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: black;
 `;

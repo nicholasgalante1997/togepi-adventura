@@ -1397,10 +1397,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nickgdev/larvitar-types@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@nickgdev/larvitar-types/-/larvitar-types-1.0.3.tgz#e1a8c7e212fbdb2d82a31cb1de35ee537bf13d05"
-  integrity sha512-o86/LNJInDpyZt40sCpH+zRkEHWsqGIgI+Y26wAv67AoxawbE7ndig+JfFpMyQfWMr80DRkdIjo62AoFh3Sbrw==
+"@nickgdev/larvitar-types@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@nickgdev/larvitar-types/-/larvitar-types-1.1.0.tgz#e214e4a5ef82991bfb70828b1a217eb7cf2fe728"
+  integrity sha512-Gv/jytR3nRimyGYATcKIZsQVFUwtOYpBf9CQCBJyb51QSrTLNGlaCKVxq2M4oQwb0UATgsE4a8qxgM7Ytvs02g==
 
 "@nickgdev/porygon-metlib@^1.2.2":
   version "1.2.2"

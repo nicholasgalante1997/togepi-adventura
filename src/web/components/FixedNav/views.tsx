@@ -37,7 +37,7 @@ const OverlayOption = styled.a<{ focus: boolean }>`
 const OverlayOptionSubtext = styled.p`
   font-size: 12px;
   font-weight: 400px;
-  color: #D3D3D3;
+  color: #d3d3d3;
   margin-block-start: 0.02em;
   margin-block-end: 0.2em;
 `;

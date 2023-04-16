@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from '@nickgdev/larvitar-types';
 import { FixedNav } from '../components';
-import { CardShowPageComponent } from '../components/card-show';
-import { Footer } from '../components/footer';
+import { CardShowPageComponent } from '../components/CardShowPage';
+import { Footer } from '../components/Footer';
 
 type CardShowPageProps = {
   card: Card;

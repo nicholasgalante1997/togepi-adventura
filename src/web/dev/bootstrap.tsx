@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
 import {
   LandingPage,
@@ -9,7 +10,13 @@ import {
   Error500Page,
 } from '../pages';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 
 import '../styles/global.css';
 
@@ -121,34 +128,102 @@ const routes = [
     component: <CardSearchPage />,
   },
   {
-    path: '/card/:cardId',
+    path: '/card/swsh10-120',
     component: <CardShowPage card={mockCard} />,
   },
   {
     path: '/deck/builder',
-    component: (<DeckBuilderPage />)
+    component: <DeckBuilderPage />,
   },
   {
     path: '/404',
-    component: (<Error404Page />)
+    component: <Error404Page />,
   },
   {
     path: '/500',
-    component: (<Error500Page />)
-  }
+    component: <Error500Page />,
+  },
 ];
 
-function mountApp(){
-    const root = createRoot(document.getElementById('devroot')!);
-    root.render(
-      <BrowserRouter>
-        <Switch>
-          {routes.map(r => <Route path={r.path}>
+const ReactRouterNavigationBar = styled.div`
+  height: 40px;
+
+  padding: 16px;
+
+  background-color: white;
+  color: black;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin-top: 100px;
+`;
+
+const ReactRouterCurrentRoute = styled.p`
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.15;
+  margin-right: 8px;
+`;
+
+const ReactRouterPathInput = styled.input`
+  height: 32px;
+  width: 200px;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 2px;
+`;
+
+const ReactRouterPushButton = styled.button`
+  border-radius: 4px;
+  border: 1px solid black;
+  background-color: chartreuse;
+  color: black;
+  margin-left: 8px;
+`;
+
+function App() {
+  const { pathname } = useLocation();
+  const { push } = useHistory();
+
+  const [pathState, setPathState] = React.useState(pathname);
+
+  return (
+    <React.Fragment>
+      <Switch>
+        {routes.map((r) => (
+          <Route exact path={r.path}>
             {r.component}
-          </Route>)}
-        </Switch>
-      </BrowserRouter>
-    );
-};
+          </Route>
+        ))}
+      </Switch>
+      <ReactRouterNavigationBar>
+        <ReactRouterCurrentRoute>
+          React Router DOM /// Current Path is{' '}
+          <span style={{ color: 'red' }}>{pathname}</span>
+        </ReactRouterCurrentRoute>
+        <ReactRouterPathInput
+          value={pathState}
+          onChange={(e) => setPathState(e.target.value)}
+        />
+        <ReactRouterPushButton onClick={() => push(pathState)}>
+          Go
+        </ReactRouterPushButton>
+      </ReactRouterNavigationBar>
+    </React.Fragment>
+  );
+}
+
+function mountApp() {
+  const root = createRoot(document.getElementById('devroot')!);
+  root.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
 
 mountApp();

@@ -1,6 +1,13 @@
 import React from 'react';
 import { getPokemonPaletteByPokemonName, PokemonName } from '../../utils';
-import { FooterContainer, PokemonImage } from './views';
+import {
+  FooterContainer,
+  FooterLinkContainer,
+  FooterPokemonContainer,
+  Link,
+  LinkSilo,
+  PokemonImage,
+} from './views';
 
 const pokemonImageMap: Record<PokemonName, string> = {
   gengar:
@@ -20,22 +27,31 @@ const pokemonImageMap: Record<PokemonName, string> = {
 export function Footer(props: { pokemon: PokemonName }) {
   return (
     <FooterContainer pokemon={props.pokemon}>
-      <h5>Johto Trading Co. &copy;</h5>
-      <p>
-        This page was inspired by{' '}
-        <span
-          style={{
-            fontSize: '18px',
-            fontWeight: 600,
-            color: getPokemonPaletteByPokemonName(props.pokemon).starkContrast,
-            textTransform: 'capitalize',
-            fontVariant: 'small-caps',
-          }}
-        >
-          {props.pokemon}
-        </span>
-      </p>
-      <PokemonImage src={pokemonImageMap[props.pokemon]} />
+      <FooterPokemonContainer>
+        <h5>Johto Trading Co. &copy;</h5>
+        <p>
+          This page was inspired by{' '}
+          <span
+            style={{
+              fontSize: '18px',
+              fontWeight: 600,
+              color: getPokemonPaletteByPokemonName(props.pokemon)
+                .starkContrast,
+              textTransform: 'capitalize',
+              fontVariant: 'small-caps',
+            }}
+          >
+            {props.pokemon}
+          </span>
+        </p>
+        <PokemonImage src={pokemonImageMap[props.pokemon]} />
+      </FooterPokemonContainer>
+      <FooterLinkContainer>
+        <LinkSilo>
+          <h4>Shop</h4>
+          <Link>Scarlet and Violet</Link>
+        </LinkSilo>
+      </FooterLinkContainer>
     </FooterContainer>
   );
 }
