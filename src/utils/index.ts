@@ -1,2 +1,2 @@
-export * from './hte';
+export * from './server-render';
 export * from './log';

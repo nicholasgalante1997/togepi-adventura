@@ -3,6 +3,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { getPokemonPaletteByPokemonName } from '../../utils';
 
+export const LinkWrapper = styled.a`
+  box-sizing: border-box;
+  padding: 0px;
+  border-radius: 6px;
+`
+
 export const LPContainer = styled.div`
   box-sizing: border-box;
   background: inherit;
@@ -102,10 +108,10 @@ export const Button = styled.button`
   }
 `;
 
-export const WidgetTwoContainer = styled.div`
+export const WidgetTwoContainer = styled.div<{ lead: string; blend: string; }>`
   width: 100%;
   height: 400px;
-  background: white;
+  background-image: ${props => `linear-gradient(to bottom, ${props.lead}, ${props.blend})`};
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -131,5 +137,12 @@ export const CardContainer = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  background-color: black;
+`;
+
+export const CardImage = styled.img`
+  height: 320px;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
 `;

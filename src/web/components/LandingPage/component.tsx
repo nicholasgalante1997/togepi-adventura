@@ -11,10 +11,15 @@ import {
   WidgetTwoContainer,
   CardContainer,
   TextContainer,
+  CardImage,
+  LinkWrapper,
 } from './views';
 import { Banner } from '../Banner';
-import { withFadeUpAnimation } from '../HOCs';
+import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
 import { getAsset, getString } from '../../contexts';
+import { getPokemonPaletteByPokemonName } from '../../utils';
+import ColorScale from 'color-scales';
+import { Card } from '@nickgdev/larvitar-types';
 
 const PAGE_PREFIX = 'landingPage' as const;
 
@@ -22,14 +27,39 @@ function Heading({ children, ...rest }: any) {
   return <h2 {...rest}>{children}</h2>;
 }
 
+const ImageWithBoxShadow = withBoxShadowRaiseAnimation(CardImage);
+
+function ImageLink(props: {
+  href: string;
+  imageSrc: string;
+  imageAlt: string;
+  className?: string;
+}) {
+  return (
+    <LinkWrapper href={props.href} target="_self" tabIndex={1} className={props.className}>
+      <ImageWithBoxShadow src={props.imageSrc} alt={props.imageAlt} />
+    </LinkWrapper>
+  );
+}
+
 const FadeUpHeading = withFadeUpAnimation(Heading);
 
-export function LandingPageComponent() {
+export type LandingPageProps = {
+  layout: {
+    banner: {
+      cards: Pick<Card, 'images' | 'name' | 'id' | 'set'>[];
+    };
+  };
+};
+
+export function LandingPageComponent(props: LandingPageProps) {
   const titleOrUndefined = getString(PAGE_PREFIX + '_title');
   const subtitleOrUndefined = getString(PAGE_PREFIX + '_subtitle');
   const trainerImgAssetOrUndefined = getAsset(
     PAGE_PREFIX + '_trainerWithPikachu'
   );
+
+  const pagePalette = getPokemonPaletteByPokemonName('totodile');
 
   React.useEffect(() => {
     if (
@@ -76,27 +106,42 @@ export function LandingPageComponent() {
   function renderBanner() {
     return (
       <Banner
-        bannerBuddy="eevee"
-        backgroundColor="#3a0960"
+        backgroundColor={new ColorScale(0, 100, [
+          pagePalette.backgroundColor,
+          '#ffffff',
+        ])
+          .getColor(50)
+          .toHexString()}
         textColor="white"
         hoverColor="red"
-        withAction
-        action={{ href: '/sp/scarlet-violet', text: 'Learn More' }}
       >
-        Check out the new Scarlet and Violet Card Drop!
+        <p>
+          Check out the new{' '}
+          <a href="/cards/search?q=set.name:sv1" target="_self">
+            Scarlet and Violet Card Drop!
+          </a>
+        </p>
       </Banner>
     );
   }
 
   function renderWidgetTwo() {
     return (
-      <WidgetTwoContainer>
+      <WidgetTwoContainer lead={pagePalette.starkContrast} blend={pagePalette.starkContrastOffset}>
         <TextContainer>
           <FadeUpHeading>
             Check Out the Hottest Singles in Scarlet and Violet
           </FadeUpHeading>
         </TextContainer>
-        <CardContainer></CardContainer>
+        <CardContainer>
+          {props.layout.banner.cards.map((cardProps) => (
+            <ImageLink
+              imageSrc={cardProps.images.large}
+              imageAlt={cardProps.name}
+              href={`/card/${cardProps.id}`}
+            />
+          ))}
+        </CardContainer>
       </WidgetTwoContainer>
     );
   }

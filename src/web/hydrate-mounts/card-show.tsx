@@ -1,26 +1,28 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { hydrateRoot } from 'react-dom/client';
 import { CardShowPage } from '../pages';
 
+const client = new QueryClient();
+const dehydratedState = window && (window as (typeof window & typeof globalThis & { __REACT_QUERY_STATE__: string })).__REACT_QUERY_STATE__;
+
 function hydrateCardShowPage() {
-  const componentStateEl: HTMLDivElement | null = document.querySelector(
-    '#component-state-mount'
-  );
-  if (!componentStateEl) {
-    /** handle error */
-    return;
-  }
+  
+  const href = window.location.href;
+  const url = new URL(href);
+  const { pathname } = url;
+  const pkID = pathname.split('/')[pathname.split('/').length - 1];
 
-  const innerText = componentStateEl.innerText;
-
-  const cardState = JSON.parse(innerText);
+  console.log('[web/hydrate-mounts/card-show] Im being rendered.')
 
   hydrateRoot(
     document.getElementById('production-root')!,
-    <CardShowPage card={cardState.props.card} />
+    <QueryClientProvider client={client}>
+      <Hydrate state={dehydratedState}>
+        <CardShowPage pkId={pkID} />
+      </Hydrate>
+    </QueryClientProvider>
   );
-
-  componentStateEl.remove();
 }
 
 hydrateCardShowPage();

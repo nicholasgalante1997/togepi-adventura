@@ -1,9 +1,5 @@
-import { TCGService } from './tcg-service';
-import {
-  CARDS_ENDPOINT,
-  Card,
-  CARDS_ENDPOINT_OPTIONS,
-} from '@nickgdev/larvitar-types';
+import { TCGService } from './tcg.service';
+import { CARDS_ENDPOINT, Card } from '@nickgdev/larvitar-types';
 
 class CardService extends TCGService {
   constructor() {
@@ -22,7 +18,7 @@ class CardService extends TCGService {
     return data;
   }
 
-  public async getCards(queryObj?: CARDS_ENDPOINT_OPTIONS) {
+  public async getCards(queryObj?: { q: string }) {
     const { data, status, statusText } = await this.axiosInstance.get<
       { data: Card[] } & Record<string, any>
     >(queryObj ? `?${queryObj.q}` : '');
