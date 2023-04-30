@@ -1,8 +1,5 @@
 import { useQuery } from 'react-query';
-import {
-  LANDING_PAGE_QUERY_KEY,
-  getLandingPageAsyncProps,
-} from '../../../react-query-server';
+import { LANDING_PAGE_QUERY_KEY, getLandingPageAsyncProps } from '../../../react-query-server';
 
 export const useQueryLandingPageProps = () =>
   useQuery({

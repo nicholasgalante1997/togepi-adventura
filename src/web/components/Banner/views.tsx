@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Color } from '../../styles/models';
 
 export type BannerContainerProps = {
   textColor: string;
@@ -21,12 +22,14 @@ export const BannerContainer = styled.div<BannerContainerProps>`
   justify-content: space-between;
   align-items: center;
   padding-right: 16px;
+  text-align: center;
 
   & > p {
     margin-left: 6px;
     font-size: 16px;
-    line-height: 1.15;
+    line-height: 1.5;
     display: inline-block;
+    vertical-align: middle;
 
     & > a {
       font-size: 16px;
@@ -34,11 +37,19 @@ export const BannerContainer = styled.div<BannerContainerProps>`
       display: inline-block;
       cursor: pointer;
       margin-left: 8px;
+      color: ${Color.Tint100};
 
       &:hover {
         font-size: 18px;
         color: ${(props) => props.hoverColor};
       }
+    }
+
+    & > span {
+      padding-top: 4px;
+      line-height: 1.15;
+      text-align: center;
+      margin-left: 10px;
     }
   }
 `;

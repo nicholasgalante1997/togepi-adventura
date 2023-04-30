@@ -1,8 +1,5 @@
 import { useQuery } from 'react-query';
-import {
-  CARD_SHOW_QUERY_KEY,
-  getCardShowAsyncProps,
-} from '../../../react-query-server';
+import { CARD_SHOW_QUERY_KEY, getCardShowAsyncProps } from '../../../react-query-server';
 
 export const useCardShowPageProps = (id: string) =>
   useQuery({

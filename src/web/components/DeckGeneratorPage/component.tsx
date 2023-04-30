@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  DeckGenPageContainer,
-  DeckGenInput,
-  DeckGenInputContainer,
-  DeckGenButton,
-  ChatGPTBannerDisclaimer,
-} from './views';
+import { DeckGenPageContainer, DeckGenInput, DeckGenInputContainer, DeckGenButton, ChatGPTBannerDisclaimer } from './views';
 import { PokeBall } from './loading-screen';
 import { deckBuilderService, DeckBuilderService } from '../../../services';
 import ReactMarkdown from 'react-markdown';
@@ -24,10 +18,7 @@ export function DeckGeneratorPageComponent() {
       if (!pokemonQuery || !setQuery) {
         return;
       }
-      const { openAiGeneratedDeck } = await deckBuilderService.query(
-        pokemonQuery,
-        setQuery
-      );
+      const { openAiGeneratedDeck } = await deckBuilderService.query(pokemonQuery, setQuery);
       setSuggestedDeckText(DeckBuilderService.purge(openAiGeneratedDeck));
       return;
     } catch (e: any) {
@@ -50,10 +41,7 @@ export function DeckGeneratorPageComponent() {
       >
         <PokeBall />
         <div style={{ maxWidth: '300px', textAlign: 'start' }}>
-          <h6>
-            Generating your deck. Please don't refresh the page. Deck generation
-            can take up to 1 minute...
-          </h6>
+          <h6>Generating your deck. Please don't refresh the page. Deck generation can take up to 1 minute...</h6>
         </div>
       </div>
     );
@@ -83,12 +71,9 @@ export function DeckGeneratorPageComponent() {
         <ChatGPTBannerDisclaimer>
           <h5>Disclaimer</h5>
           <p>
-            ChatGPT isn't like some genius. It's also not a master Pokemon
-            trainer. There are times when it gets things wrong. Sometimes it
-            makes up a card, this usually happens with Pokemon (as opposed to
-            trainer and energy cards), and it usually happens when it wants an
-            evolution to a V pokemon (VMax or VStar) but that evolution doesn't
-            exist. If it happens, eh just try again.
+            ChatGPT isn't like some genius. It's also not a master Pokemon trainer. There are times when it gets things wrong. Sometimes it
+            makes up a card, this usually happens with Pokemon (as opposed to trainer and energy cards), and it usually happens when it
+            wants an evolution to a V pokemon (VMax or VStar) but that evolution doesn't exist. If it happens, eh just try again.
           </p>
         </ChatGPTBannerDisclaimer>
         <hr style={{ width: '100%' }} />
@@ -109,24 +94,13 @@ export function DeckGeneratorPageComponent() {
         <div style={{ maxWidth: '70%' }}>
           <h2>OpenAI ChatGPT Powered Deck Builder</h2>
           <p>Have ChatGPT build a deck for you!</p>
-          <p>
-            Just input a card to focus the deck around and it will generate a
-            full standard card deck around that card.
-          </p>
+          <p>Just input a card to focus the deck around and it will generate a full standard card deck around that card.</p>
         </div>
         <DeckGenInputContainer>
           <label>Card (typically a pokemon)</label>
-          <DeckGenInput
-            placeholder="'Pikachu V Trainer Gallery'"
-            value={pokemonQuery}
-            onChange={(e) => setPokemonQuery(e.target.value)}
-          />
+          <DeckGenInput placeholder="'Pikachu V Trainer Gallery'" value={pokemonQuery} onChange={(e) => setPokemonQuery(e.target.value)} />
           <label>Set</label>
-          <DeckGenInput
-            placeholder="'Lost Origin'"
-            value={setQuery}
-            onChange={(e) => setSetQuery(e.target.value)}
-          />
+          <DeckGenInput placeholder="'Lost Origin'" value={setQuery} onChange={(e) => setSetQuery(e.target.value)} />
         </DeckGenInputContainer>
         <div style={{ marginTop: '16px' }}>
           <DeckGenButton onClick={queryDeckBuilder}>Build Deck</DeckGenButton>

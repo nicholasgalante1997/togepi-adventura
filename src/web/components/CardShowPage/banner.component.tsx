@@ -25,12 +25,7 @@ export function CardShowBanner(props: { card: Card }) {
         <SetImageContainer>
           <SetImage zIndex={0} src={props.card.set.images.logo} />
         </SetImageContainer>
-        <CardTitle
-          types={[
-            ...props.card.types,
-            ...(props.card.subtypes ? props.card.subtypes : []),
-          ]}
-        >
+        <CardTitle types={[...props.card.types, ...(props.card.subtypes ? props.card.subtypes : [])]}>
           {props.card.number}. {props.card.name}
         </CardTitle>
         <CardActionContainer>

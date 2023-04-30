@@ -3,21 +3,24 @@ import {
   CardSearchPageContainer,
   CardSearchButton,
   CardSearchInput,
-  CardSearchLabel,
-  CardSearchContainer,
-  CardSearchContainerInnerRow,
+  CardSearchUtilityBar,
+  SearchBarContainer,
+  SortBarContainer,
 } from './views';
+import { ToggleSort } from '../ToggleSort';
 
 export function CardSearchPageComponent() {
   return (
     <CardSearchPageContainer>
-      <CardSearchContainer>
-        <CardSearchLabel>Search Pokemon Trading Cards</CardSearchLabel>
-        <CardSearchContainerInnerRow>
+      <CardSearchUtilityBar>
+        <SortBarContainer>
+          <ToggleSort />
+        </SortBarContainer>
+        <SearchBarContainer>
           <CardSearchInput />
           <CardSearchButton>Search</CardSearchButton>
-        </CardSearchContainerInnerRow>
-      </CardSearchContainer>
+        </SearchBarContainer>
+      </CardSearchUtilityBar>
     </CardSearchPageContainer>
   );
 }

@@ -2,10 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 
 class TCGService {
   axiosInstance: AxiosInstance;
-  constructor(
-    endpoint: string,
-    headers: Record<string, string | string[]> = {}
-  ) {
+  constructor(endpoint: string, headers: Record<string, string | string[]> = {}) {
     this.axiosInstance = axios.create({
       baseURL: endpoint,
       responseType: 'json',

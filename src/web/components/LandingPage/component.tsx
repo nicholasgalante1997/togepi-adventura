@@ -17,9 +17,8 @@ import {
 import { Banner } from '../Banner';
 import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
 import { getAsset, getString } from '../../contexts';
-import { getPokemonPaletteByPokemonName } from '../../utils';
-import ColorScale from 'color-scales';
 import { Card } from '@nickgdev/larvitar-types';
+import { Color } from '../../styles/models';
 
 const PAGE_PREFIX = 'landingPage' as const;
 
@@ -27,22 +26,17 @@ function Heading({ children, ...rest }: any) {
   return <h2 {...rest}>{children}</h2>;
 }
 
+const FadeUpHeading = withFadeUpAnimation(Heading);
+
 const ImageWithBoxShadow = withBoxShadowRaiseAnimation(CardImage);
 
-function ImageLink(props: {
-  href: string;
-  imageSrc: string;
-  imageAlt: string;
-  className?: string;
-}) {
+function ImageLink(props: { href: string; imageSrc: string; imageAlt: string; className?: string }) {
   return (
     <LinkWrapper href={props.href} target="_self" tabIndex={1} className={props.className}>
       <ImageWithBoxShadow src={props.imageSrc} alt={props.imageAlt} />
     </LinkWrapper>
   );
 }
-
-const FadeUpHeading = withFadeUpAnimation(Heading);
 
 export type LandingPageProps = {
   layout: {
@@ -55,17 +49,10 @@ export type LandingPageProps = {
 export function LandingPageComponent(props: LandingPageProps) {
   const titleOrUndefined = getString(PAGE_PREFIX + '_title');
   const subtitleOrUndefined = getString(PAGE_PREFIX + '_subtitle');
-  const trainerImgAssetOrUndefined = getAsset(
-    PAGE_PREFIX + '_trainerWithPikachu'
-  );
-
-  const pagePalette = getPokemonPaletteByPokemonName('totodile');
+  const trainerImgAssetOrUndefined = getAsset(PAGE_PREFIX + '_trainerWithPikachu');
 
   React.useEffect(() => {
-    if (
-      typeof titleOrUndefined === 'undefined' ||
-      typeof trainerImgAssetOrUndefined === 'undefined'
-    ) {
+    if (typeof titleOrUndefined === 'undefined' || typeof trainerImgAssetOrUndefined === 'undefined') {
       window && window.location.replace('');
     }
   }, [titleOrUndefined, trainerImgAssetOrUndefined]);
@@ -74,10 +61,7 @@ export function LandingPageComponent(props: LandingPageProps) {
     return (
       <LPContainer>
         <LPTrainerPokemonImageContainer>
-          <LPTrainerPokemonImage
-            src={'/' + trainerImgAssetOrUndefined}
-            alt="Pokemon Trainer w Pikachu"
-          />
+          <LPTrainerPokemonImage src={'/' + trainerImgAssetOrUndefined} alt="Pokemon Trainer w Pikachu" />
         </LPTrainerPokemonImageContainer>
         <CallToActionContainer>
           <Title>{titleOrUndefined}</Title>
@@ -105,16 +89,7 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   function renderBanner() {
     return (
-      <Banner
-        backgroundColor={new ColorScale(0, 100, [
-          pagePalette.backgroundColor,
-          '#ffffff',
-        ])
-          .getColor(50)
-          .toHexString()}
-        textColor="white"
-        hoverColor="red"
-      >
+      <Banner backgroundColor={Color.Tint600} textColor="white" hoverColor={Color.Tint200}>
         <p>
           Check out the new{' '}
           <a href="/cards/search?q=set.name:sv1" target="_self">
@@ -127,19 +102,13 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   function renderWidgetTwo() {
     return (
-      <WidgetTwoContainer lead={pagePalette.starkContrast} blend={pagePalette.starkContrastOffset}>
+      <WidgetTwoContainer>
         <TextContainer>
-          <FadeUpHeading>
-            Check Out the Hottest Singles in Scarlet and Violet
-          </FadeUpHeading>
+          <FadeUpHeading style={{ color: 'white' }}>Check Out the Hottest Singles in Scarlet and Violet</FadeUpHeading>
         </TextContainer>
         <CardContainer>
           {props.layout.banner.cards.map((cardProps) => (
-            <ImageLink
-              imageSrc={cardProps.images.large}
-              imageAlt={cardProps.name}
-              href={`/card/${cardProps.id}`}
-            />
+            <ImageLink imageSrc={cardProps.images.large} imageAlt={cardProps.name} href={`/card/${cardProps.id}`} />
           ))}
         </CardContainer>
       </WidgetTwoContainer>
@@ -148,8 +117,8 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   return (
     <React.Fragment>
-      {renderWidgetOne()}
       {renderBanner()}
+      {renderWidgetOne()}
       {renderWidgetTwo()}
     </React.Fragment>
   );

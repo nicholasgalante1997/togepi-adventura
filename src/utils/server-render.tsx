@@ -30,10 +30,7 @@ export type EmbedOptions = {
   props?: Record<string, any>;
 };
 
-export function embed(
-  Component: React.ComponentType<any>,
-  options: EmbedOptions
-) {
+export function embed(Component: React.ComponentType<any>, options: EmbedOptions) {
   let html: string;
   let pageString: string;
   let error: Error | undefined;
@@ -42,10 +39,7 @@ export function embed(
 
   try {
     l('retrieving html template...');
-    html = fs.readFileSync(
-      path.resolve(process.cwd(), 'html', 'prod.template.html'),
-      { encoding: 'utf-8' }
-    );
+    html = fs.readFileSync(path.resolve(process.cwd(), 'html', 'prod.template.html'), { encoding: 'utf-8' });
     l('Dehydrating styled-components on server...');
     const reactNode: React.ReactNode = options.queryConfig ? (
       <QueryClientProvider client={options.queryConfig.queryClient}>
@@ -64,10 +58,7 @@ export function embed(
     error = e as Error;
     throw e;
   } finally {
-    l(
-      `operation ended: status "${error ? 'failed' : 'successful'}"`,
-      error ? 'error' : 'info'
-    );
+    l(`operation ended: status "${error ? 'failed' : 'successful'}"`, error ? 'error' : 'info');
     sheet.seal();
   }
 
@@ -82,22 +73,15 @@ export function embed(
   }
 
   if (options.props && Object.keys(options.props).length > 0) {
-    const componentStateElement = `<div id="component-state-mount">${JSON.stringify(
-      { props: options.props }
-    )}</div>`;
+    const componentStateElement = `<div id="component-state-mount">${JSON.stringify({ props: options.props })}</div>`;
     html = html.replace('<!-- __data_state_mount__ -->', componentStateElement);
   } else {
     html = html.replace('<!-- __data_state_mount__ -->', '');
   }
 
   if (options.queryConfig && options.queryConfig.dehydratedState) {
-    const reactQueryScriptTag = `<script>window.__REACT_QUERY_STATE__ = ${JSON.stringify(
-      options.queryConfig.dehydratedState
-    )};</script>`;
-    html = html.replace(
-      '<!-- __react_query_script_mount__ -->',
-      reactQueryScriptTag
-    );
+    const reactQueryScriptTag = `<script>window.__REACT_QUERY_STATE__ = ${JSON.stringify(options.queryConfig.dehydratedState)};</script>`;
+    html = html.replace('<!-- __react_query_script_mount__ -->', reactQueryScriptTag);
   } else {
     html = html.replace('<!-- __react_query_script_mount__ -->', '');
   }
@@ -105,8 +89,5 @@ export function embed(
   const scriptTag = `<script src="/${options.bundleName}.bundle.js" defer></script>`;
   html = html.replace('<!-- __client_js_mount__ -->', scriptTag);
 
-  return html.replace(
-    '<div id="production-root"></div>',
-    `<div id="production-root">${pageString}</div>`
-  );
+  return html.replace('<div id="production-root"></div>', `<div id="production-root">${pageString}</div>`);
 }

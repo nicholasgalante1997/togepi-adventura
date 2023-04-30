@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  CardContainer,
-  CardImage,
-  CardImageContainer,
-  CardInfoContainer,
-  CardTitle,
-} from './views';
+import { CardContainer, CardImage, CardImageContainer, CardInfoContainer, CardTitle } from './views';
 import { Card } from '@nickgdev/larvitar-types';
 
 type CardInfoProps = Card;

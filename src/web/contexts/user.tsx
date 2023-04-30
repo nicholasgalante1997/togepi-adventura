@@ -13,9 +13,7 @@ export function getUser() {
   return React.useContext(userContext);
 }
 
-export function UserProvider(props: {
-  children: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[];
-}) {
+export function UserProvider(props: { children: React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[] }) {
   const [userCtx, setUserCtx] = React.useState<User | undefined>();
   React.useEffect(() => {
     const prevUser = window.localStorage.getItem('pk-user-hash');

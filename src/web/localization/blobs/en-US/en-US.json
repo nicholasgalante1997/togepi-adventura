@@ -3,16 +3,25 @@
   "public": {
     "strings": {
       "landingPage_title": {
-        "value": "Johto Trading Co.",
-        "note": "See if Pokemon sues us."
+        "value": "Local Card Shop, Trading Co.",
+        "note": "Website Title"
       },
       "landingPage_subtitle": {
-        "value": "Where Elite Pokemon Trainers Come to Wheel and Deal",
-        "note": "updated last on 3/6"
+        "value": "Shop Cards. Submit Cards for Grading. Build Decks. Collect Online Art. All In One Place.",
+        "note": "Make this longer and more tailored to commerce."
+      },
+      "desktopNavBar_logoText": {
+        "value": "Local Card Shop",
+        "note": "See above"
+      },
+      "desktopNavBar_tokensTab_title": {
+        "value": "Tokens",
+        "note": ""
       }
     },
     "assets": {
-      "landingPage_trainerWithPikachu": "lp_trainer.png"
+      "landingPage_trainerWithPikachu": "lp_trainer.png",
+      "desktopNavBar_logoInnerIcon": "https://img.icons8.com/ios-glyphs/30/null/modern-art.png"
     }
   }
 }

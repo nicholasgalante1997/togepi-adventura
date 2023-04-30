@@ -19,10 +19,7 @@ const DeckGenPageContainer = styled.div`
 `;
 
 const ChatGPTBannerDisclaimer = styled.div`
-  background-color: ${new ColorScale(0, 100, [
-    getPokemonPaletteByPokemonName('gengar').backgroundColor,
-    '#000000',
-  ])
+  background-color: ${new ColorScale(0, 100, [getPokemonPaletteByPokemonName('gengar').backgroundColor, '#000000'])
     .getColor(30)
     .toHexString()};
   border-radius: 6px;
@@ -76,8 +73,7 @@ const DeckGenInput = styled.input`
   }
 
   &:active {
-    border: 1px solid
-      ${getPokemonPaletteByPokemonName('gengar').starkContrastOffset};
+    border: 1px solid ${getPokemonPaletteByPokemonName('gengar').starkContrastOffset};
     border-radius: 4px;
   }
 `;
@@ -99,17 +95,10 @@ const DeckGenButton = styled.button`
 
   &:hover {
     border: 1px solid ${getPokemonPaletteByPokemonName('gengar').starkContrast};
-    background-color: ${getPokemonPaletteByPokemonName('gengar')
-      .backgroundColor};
+    background-color: ${getPokemonPaletteByPokemonName('gengar').backgroundColor};
     color: white;
     box-shadow: 1px 1px 4px rgb(0, 0, 0);
   }
 `;
 
-export {
-  DeckGenPageContainer,
-  DeckGenInput,
-  DeckGenInputContainer,
-  DeckGenButton,
-  ChatGPTBannerDisclaimer,
-};
+export { DeckGenPageContainer, DeckGenInput, DeckGenInputContainer, DeckGenButton, ChatGPTBannerDisclaimer };

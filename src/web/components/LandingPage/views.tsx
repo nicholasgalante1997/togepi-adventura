@@ -2,12 +2,13 @@ import ColorScale from 'color-scales';
 import React from 'react';
 import styled from 'styled-components';
 import { getPokemonPaletteByPokemonName } from '../../utils';
+import { Color } from '../../styles/models';
 
 export const LinkWrapper = styled.a`
   box-sizing: border-box;
   padding: 0px;
   border-radius: 6px;
-`
+`;
 
 export const LPContainer = styled.div`
   box-sizing: border-box;
@@ -20,9 +21,9 @@ export const LPContainer = styled.div`
   flex-grow: 1;
   overflow: visible;
   min-height: 400px;
+  height: calc(100vh - 132px);
   width: 100%;
-  background-color: ${getPokemonPaletteByPokemonName('totodile')
-    .backgroundColor};
+  background-color: ${Color.Base};
 `;
 
 export const LPTrainerPokemonImageContainer = styled.div`
@@ -76,8 +77,7 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: ${getPokemonPaletteByPokemonName('totodile')
-    .starkContrastOffset};
+  background-color: ${getPokemonPaletteByPokemonName('totodile').starkContrastOffset};
   color: black;
   border-radius: 6px;
   border: 1px solid black;
@@ -93,10 +93,7 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${new ColorScale(0, 100, [
-      getPokemonPaletteByPokemonName('totodile').backgroundColor,
-      '#000000',
-    ])
+    background-color: ${new ColorScale(0, 100, [getPokemonPaletteByPokemonName('totodile').backgroundColor, '#000000'])
       .getColor(30)
       .toHexString()};
     color: #ffffff;
@@ -108,15 +105,15 @@ export const Button = styled.button`
   }
 `;
 
-export const WidgetTwoContainer = styled.div<{ lead: string; blend: string; }>`
+export const WidgetTwoContainer = styled.div`
   width: 100%;
   height: 400px;
-  background-image: ${props => `linear-gradient(to bottom, ${props.lead}, ${props.blend})`};
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   padding: 0px;
   margin: 0px;
+  background-color: ${Color.Tint300};
 `;
 
 export const TextContainer = styled.div`

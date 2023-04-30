@@ -1,11 +1,4 @@
-export type PokemonName =
-  | 'gengar'
-  | 'porygon'
-  | 'growlithe'
-  | 'typhlosion'
-  | 'togepi'
-  | 'rayquaza'
-  | 'totodile';
+export type PokemonName = 'gengar' | 'porygon' | 'growlithe' | 'typhlosion' | 'togepi' | 'rayquaza' | 'totodile';
 
 export function getPokemonPaletteByPokemonName(pokemon: PokemonName) {
   const pokemonColorMap: Record<PokemonName, { [x: string]: string }> = {

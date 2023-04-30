@@ -2,19 +2,29 @@ import React from 'react';
 import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { hydrateRoot } from 'react-dom/client';
 import { LandingPage } from '../pages';
+import { ServerConfig } from '../../types/server-props';
 
-type ReactQueryExtendedWindow = typeof window &
-  typeof globalThis & { __REACT_QUERY_STATE__: string };
+type ReactQueryExtendedWindow = typeof window & typeof globalThis & { __REACT_QUERY_STATE__: string };
 
 function hydrateHomeMarketplace() {
-  const dehydratedState =
-    window && (window as ReactQueryExtendedWindow).__REACT_QUERY_STATE__;
+  const propStateElement = document.getElementById('component-state-mount');
+  console.log({ propStateElement });
+  const componentPropString = propStateElement?.innerText;
+  let propData: any;
+  if (componentPropString) {
+    propData = JSON.parse(componentPropString)?.props;
+    console.log(propData);
+  }
+  if (propStateElement) {
+    propStateElement.remove();
+  }
+  const dehydratedState = window && (window as ReactQueryExtendedWindow).__REACT_QUERY_STATE__;
   const client = new QueryClient();
   hydrateRoot(
     document.getElementById('production-root')!,
     <QueryClientProvider client={client}>
       <Hydrate state={dehydratedState}>
-        <LandingPage />
+        <LandingPage serverConfig={propData.serverConfig as ServerConfig} />
       </Hydrate>
     </QueryClientProvider>
   );

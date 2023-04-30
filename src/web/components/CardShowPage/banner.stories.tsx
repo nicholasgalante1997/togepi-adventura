@@ -8,9 +8,7 @@ export default {
   component: CardShowBanner,
 } as ComponentMeta<typeof CardShowBanner>;
 
-const T: ComponentStory<typeof CardShowBanner> = (args: { card: Card }) => (
-  <CardShowBanner {...args} />
-);
+const T: ComponentStory<typeof CardShowBanner> = (args: { card: Card }) => <CardShowBanner {...args} />;
 
 export const Default = T.bind({});
 Default.args = {
@@ -22,9 +20,7 @@ Default.args = {
     hp: '180',
     types: ['Grass'],
     evolvesTo: ['M Venusaur-EX'],
-    rules: [
-      'Pokémon-EX rule: When a Pokémon-EX has been Knocked Out, your opponent takes 2 Prize cards.',
-    ],
+    rules: ['Pokémon-EX rule: When a Pokémon-EX has been Knocked Out, your opponent takes 2 Prize cards.'],
     attacks: [
       {
         name: 'Poison Powder',

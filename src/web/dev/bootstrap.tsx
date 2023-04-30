@@ -1,22 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
-import {
-  LandingPage,
-  CardSearchPage,
-  CardShowPage,
-  DeckBuilderPage,
-  Error404Page,
-  Error500Page,
-} from '../pages';
+import { QueryClientProvider, QueryClient } from 'react-query';
+import { LandingPage, CardSearchPage, CardShowPage, DeckBuilderPage, Error404Page, Error500Page } from '../pages';
 
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
 import '../styles/global.css';
 
@@ -66,8 +54,7 @@ const mockCard = {
   number: '120',
   artist: 'Pani Kobayashi',
   rarity: 'Common',
-  flavorText:
-    'It always stands on one foot. It changes feet so fast, the movement can rarely be seen.',
+  flavorText: 'It always stands on one foot. It changes feet so fast, the movement can rarely be seen.',
   nationalPokedexNumbers: [163],
   legalities: { unlimited: 'Legal', standard: 'Legal', expanded: 'Legal' },
   regulationMark: 'F',
@@ -163,8 +150,7 @@ const ReactRouterNavigationBar = styled.div`
 
 const ReactRouterCurrentRoute = styled.p`
   font-weight: 700;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.15;
   margin-right: 8px;
 `;
@@ -202,16 +188,10 @@ function App() {
       </Switch>
       <ReactRouterNavigationBar>
         <ReactRouterCurrentRoute>
-          React Router DOM /// Current Path is{' '}
-          <span style={{ color: 'red' }}>{pathname}</span>
+          React Router DOM /// Current Path is <span style={{ color: 'red' }}>{pathname}</span>
         </ReactRouterCurrentRoute>
-        <ReactRouterPathInput
-          value={pathState}
-          onChange={(e) => setPathState(e.target.value)}
-        />
-        <ReactRouterPushButton onClick={() => push(pathState)}>
-          Go
-        </ReactRouterPushButton>
+        <ReactRouterPathInput value={pathState} onChange={(e) => setPathState(e.target.value)} />
+        <ReactRouterPushButton onClick={() => push(pathState)}>Go</ReactRouterPushButton>
       </ReactRouterNavigationBar>
     </React.Fragment>
   );
@@ -219,10 +199,13 @@ function App() {
 
 function mountApp() {
   const root = createRoot(document.getElementById('devroot')!);
+  const queryClient = new QueryClient();
   root.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

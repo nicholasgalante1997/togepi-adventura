@@ -6,8 +6,7 @@ import { titleCase } from '../../utils';
 
 const optionsSubtextMap: Record<ServiceTab, string> = {
   'search cards': 'Search for cards to purchase or claim.',
-  'deck builder':
-    'Use ChatGPT-4 to assist you in building a deck/deck strategies',
+  'deck builder': 'Use ChatGPT-4 to assist you in building a deck/deck strategies',
   grade: 'Submit cards for grading.',
   sell: 'Sell your bulk or singles.',
 };
@@ -24,22 +23,11 @@ export function OptionsSection() {
   return (
     <div>
       {serviceTabs.map((tab) => (
-        <div
-          onMouseEnter={() => setActiveTab(tab)}
-          onMouseLeave={() => setActiveTab(undefined)}
-        >
-          <OverlayOption
-            href={optionsNavigationMap[tab]}
-            target="_self"
-            focus={activeTab === tab}
-          >
+        <div onMouseEnter={() => setActiveTab(tab)} onMouseLeave={() => setActiveTab(undefined)}>
+          <OverlayOption href={optionsNavigationMap[tab]} target="_self" focus={activeTab === tab}>
             {titleCase(tab)}
           </OverlayOption>
-          {activeTab === tab && (
-            <OverlayOptionSubtext>
-              {optionsSubtextMap[activeTab]}
-            </OverlayOptionSubtext>
-          )}
+          {activeTab === tab && <OverlayOptionSubtext>{optionsSubtextMap[activeTab]}</OverlayOptionSubtext>}
         </div>
       ))}
     </div>

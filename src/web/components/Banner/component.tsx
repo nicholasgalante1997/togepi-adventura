@@ -17,11 +17,7 @@ export function Banner(props: BannerProps) {
   }
 
   return (
-    <BannerContainer
-      backgroundColor={props.backgroundColor}
-      hoverColor={props.hoverColor}
-      textColor={props.textColor}
-    >
+    <BannerContainer backgroundColor={props.backgroundColor} hoverColor={props.hoverColor} textColor={props.textColor}>
       {props.children}
       {props.bannerBuddy && renderBannerBuddy()}
     </BannerContainer>

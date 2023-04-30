@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
 import { QueryClient, dehydrate } from 'react-query';
 import { embed, l } from '../../utils';
-import {
-  CARD_SHOW_QUERY_KEY,
-  getCardShowAsyncProps,
-} from '../../react-query-server';
+import { CARD_SHOW_QUERY_KEY, getCardShowAsyncProps } from '../../react-query-server';
 import { CardShowPage, Error404Page, Error500Page } from '../../web/pages';
 
 export async function pokemonCardShowHandler(req: Request, res: Response) {

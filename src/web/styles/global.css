@@ -26,7 +26,7 @@ body {
   align-items: center;
 }
 
-.fixed-nav {
+.fixed-nav-mobile-icon-container {
   isolation: isolate;
   position: fixed;
   top: 4px;
@@ -63,8 +63,7 @@ div.ball {
 }
 
 #pokeball {
-  background-image: linear-gradient(to left, #f15b38, #f15b38),
-    linear-gradient(to left, #dee1e9, #dee1e9);
+  background-image: linear-gradient(to left, #f15b38, #f15b38), linear-gradient(to left, #dee1e9, #dee1e9);
   background-repeat: no-repeat;
   background-position: 0 0, 0 50px;
   background-size: 100% 50px, 100% 50px;
@@ -116,4 +115,8 @@ div.ball {
   to {
     transform: rotate(360deg);
   }
+}
+
+.flip {
+  transform: rotate(180deg);
 }

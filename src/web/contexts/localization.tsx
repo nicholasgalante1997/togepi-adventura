@@ -2,20 +2,12 @@ import React from 'react';
 import resourceBlob from '../localization/blobs/en-US/en-US.json';
 
 type AppResourceBlob = typeof resourceBlob;
-type ReactChildrenType =
-  | React.ReactNode
-  | React.ReactNode[]
-  | JSX.Element
-  | JSX.Element[];
+type ReactChildrenType = React.ReactNode | React.ReactNode[] | JSX.Element | JSX.Element[];
 type Locale = 'en-US';
 
-const localizedResourceContext =
-  React.createContext<AppResourceBlob>(resourceBlob);
+const localizedResourceContext = React.createContext<AppResourceBlob>(resourceBlob);
 
-export function LocalizedContextProvider(props: {
-  children: ReactChildrenType;
-  locale: Locale;
-}) {
+export function LocalizedContextProvider(props: { children: ReactChildrenType; locale: Locale }) {
   const P = localizedResourceContext.Provider;
   return <P value={resourceBlob}>{props.children}</P>;
 }
