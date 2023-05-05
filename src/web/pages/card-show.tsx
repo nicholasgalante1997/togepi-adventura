@@ -4,6 +4,7 @@ import { FixedNav } from '../components';
 import { CardShowPageComponent } from '../components/CardShowPage';
 import { Footer } from '../components/Footer';
 import { useCardShowPageProps } from '../react-query-hooks';
+import { QueryCardByIdQuery } from '../../__generated__/graphql';
 
 export type CardShowPageProps = { pkId: string };
 
@@ -21,7 +22,7 @@ const GET_CARD_BY_ID = gql`
 
 export function CardShowPage(props: CardShowPageProps) {
   const { data: propData, isLoading: propsLoading, isError: propsError } = useCardShowPageProps(props.pkId);
-  const { loading: gqlLoading, error: gqlError, data: gqlData } = useQuery(GET_CARD_BY_ID, { variables: { id: props.pkId } });
+  const { loading: gqlLoading, error: gqlError, data: gqlData } = useQuery<QueryCardByIdQuery>(GET_CARD_BY_ID, { variables: { id: props.pkId } });
 
   if (propsError) {
     /** Start handling errors more targetedly */
