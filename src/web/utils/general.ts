@@ -1,5 +1,4 @@
 export function getShadowColorOffType(types: string[]) {
-  type ColorTypeTuple = [string, string];
   const colorSwatches = [
     ['grass', '#20b49c'],
     ['fire', '#e63900'],
@@ -14,8 +13,6 @@ export function getShadowColorOffType(types: string[]) {
   ];
   for (const t of types) {
     for (const c of colorSwatches) {
-      console.log(c[0]);
-      console.log(t.toLowerCase());
       if (c[0] === t.toLowerCase()) {
         return c[1];
       }

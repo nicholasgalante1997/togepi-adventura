@@ -9,11 +9,13 @@
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { ApolloClient, ApolloProvider } from '@apollo/client';
+import { renderToStringWithData } from '@apollo/client/react/ssr';
 import { ServerStyleSheet } from 'styled-components';
 import path from 'path';
 import fs from 'fs';
 import { l } from './log';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 
 export type HeadTagConfig = {
   content: string;
@@ -27,10 +29,31 @@ export type EmbedOptions = {
     queryClient: QueryClient;
     dehydratedState: any;
   };
+  apolloConfig?: {
+    apolloClient: ApolloClient<any>;
+  };
   props?: Record<string, any>;
 };
 
-export function embed(Component: React.ComponentType<any>, options: EmbedOptions) {
+function withQueryClient(
+  config: {
+    queryClient: QueryClient;
+    dehydratedState: any;
+  },
+  tree: JSX.Element
+): JSX.Element {
+  return (
+    <QueryClientProvider client={config?.queryClient}>
+      <Hydrate state={config.dehydratedState}>{tree}</Hydrate>
+    </QueryClientProvider>
+  );
+}
+
+function withApolloClientProvider(config: { apolloClient: ApolloClient<any> }, tree: JSX.Element): JSX.Element {
+  return <ApolloProvider client={config.apolloClient}>{tree}</ApolloProvider>;
+}
+
+export async function embed(Component: React.ComponentType<any>, options: EmbedOptions) {
   let html: string;
   let pageString: string;
   let error: Error | undefined;
@@ -40,16 +63,19 @@ export function embed(Component: React.ComponentType<any>, options: EmbedOptions
   try {
     l('retrieving html template...');
     html = fs.readFileSync(path.resolve(process.cwd(), 'html', 'prod.template.html'), { encoding: 'utf-8' });
+
+    l('Setting up reactNode for dehydration...');
+    let reactNode: JSX.Element = <Component {...(options.props ? options.props : {})} />;
+    if (options.queryConfig) {
+      reactNode = withQueryClient({ ...options.queryConfig }, reactNode);
+    }
+    if (options.apolloConfig) {
+      reactNode = withApolloClientProvider({ ...options.apolloConfig }, reactNode);
+      const graphQLHydratedPageString = await renderToStringWithData(reactNode);
+      reactNode = <div id="apollo-hydration-container" dangerouslySetInnerHTML={{ __html: graphQLHydratedPageString }}></div>;
+    }
+
     l('Dehydrating styled-components on server...');
-    const reactNode: React.ReactNode = options.queryConfig ? (
-      <QueryClientProvider client={options.queryConfig.queryClient}>
-        <Hydrate state={options.queryConfig.dehydratedState}>
-          <Component {...(options.props ? options.props : {})} />
-        </Hydrate>
-      </QueryClientProvider>
-    ) : (
-      <Component {...(options.props ? options.props : {})} />
-    );
     pageString = renderToString(sheet.collectStyles(reactNode));
     const styleTags = sheet.getStyleTags();
     html = html.replace('<!-- __style_mount__ -->', styleTags);
@@ -73,17 +99,31 @@ export function embed(Component: React.ComponentType<any>, options: EmbedOptions
   }
 
   if (options.props && Object.keys(options.props).length > 0) {
-    const componentStateElement = `<div id="component-state-mount">${JSON.stringify({ props: options.props })}</div>`;
+    const componentStateElement = `<div id="component-state-mount">${JSON.stringify({ props: options.props }).replace(
+      /</g,
+      '\\u003c'
+    )}</div>`;
     html = html.replace('<!-- __data_state_mount__ -->', componentStateElement);
   } else {
     html = html.replace('<!-- __data_state_mount__ -->', '');
   }
 
   if (options.queryConfig && options.queryConfig.dehydratedState) {
-    const reactQueryScriptTag = `<script>window.__REACT_QUERY_STATE__ = ${JSON.stringify(options.queryConfig.dehydratedState)};</script>`;
+    const reactQueryScriptTag = `<script>window.__REACT_QUERY_STATE__ = ${JSON.stringify(options.queryConfig.dehydratedState).replace(
+      /</g,
+      '\\u003c'
+    )};</script>`;
     html = html.replace('<!-- __react_query_script_mount__ -->', reactQueryScriptTag);
   } else {
     html = html.replace('<!-- __react_query_script_mount__ -->', '');
+  }
+
+  if (options.apolloConfig) {
+    const apolloClientCache = options.apolloConfig.apolloClient.extract();
+    const apolloClientScriptTag = `<script>window.__APOLLO_STATE__=${JSON.stringify(apolloClientCache).replace(/</g, '\\u003c')}</script>;`;
+    html = html.replace('<!-- __apollo_client_script_mount__ -->', apolloClientScriptTag);
+  } else {
+    html = html.replace('<!-- __apollo_client_script_mount__ -->', '');
   }
 
   const scriptTag = `<script src="/${options.bundleName}.bundle.js" defer></script>`;

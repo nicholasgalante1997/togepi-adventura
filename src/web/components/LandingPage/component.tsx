@@ -16,6 +16,7 @@ import {
 } from './views';
 import { Banner } from '../Banner';
 import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
+import { HeroImageCarousel } from '../HeroCarousel';
 import { getAsset, getString } from '../../contexts';
 import { Card } from '@nickgdev/larvitar-types';
 import { Color } from '../../styles/models';
@@ -117,6 +118,7 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   return (
     <React.Fragment>
+      <HeroImageCarousel />
       {renderBanner()}
       {renderWidgetOne()}
       {renderWidgetTwo()}

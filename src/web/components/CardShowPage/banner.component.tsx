@@ -13,9 +13,6 @@ import {
 } from './views';
 
 export function CardShowBanner(props: { card: Card }) {
-  console.log('**************');
-  console.log(props);
-  console.log('**************');
   return (
     <BannerContainer>
       <CardImageContainer>

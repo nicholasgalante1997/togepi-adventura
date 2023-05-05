@@ -13,12 +13,11 @@ export async function landingPageRouteHandler(req: Request, res: Response) {
     queryFn: getLandingPageAsyncProps,
   });
   const dehydratedState = dehydrate(queryClient);
-  res.send(
-    embed(LandingPage, {
-      bundleName: 'landingPage',
-      queryConfig: { dehydratedState, queryClient },
-      props: { serverConfig: { userAgent, marketplace, locale } },
-    })
-  );
+  const page = await embed(LandingPage, {
+    bundleName: 'landingPage',
+    queryConfig: { dehydratedState, queryClient },
+    props: { serverConfig: { userAgent, marketplace, locale } },
+  });
+  res.send(page);
   queryClient.clear();
 }

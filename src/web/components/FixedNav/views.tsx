@@ -110,7 +110,7 @@ export const LocalizedTabOverlay = styled.div<{ float: 'l' | 'r' }>`
   display: flex;
   flex-direction: column;
   padding: 4px;
-  z-index: 2;
+  z-index: 10;
 `;
 
 export const LocalizedTabHeading = styled.h4`

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { QueryClient, dehydrate } from 'react-query';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { embed, l } from '../../utils';
 import { CARD_SHOW_QUERY_KEY, getCardShowAsyncProps } from '../../react-query-server';
 import { CardShowPage, Error404Page, Error500Page } from '../../web/pages';
@@ -13,19 +14,27 @@ export async function pokemonCardShowHandler(req: Request, res: Response) {
     return;
   }
   try {
+    const apolloClient = new ApolloClient({
+      ssrMode: true,
+      link: createHttpLink({
+        uri: 'http://localhost:4000/graphql',
+        credentials: 'cors',
+      }),
+      cache: new InMemoryCache(),
+    });
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery({
       queryKey: [CARD_SHOW_QUERY_KEY, pkId],
       queryFn: async () => await getCardShowAsyncProps(pkId),
     });
     const dehydratedState = dehydrate(queryClient);
-    res.send(
-      embed(CardShowPage, {
-        bundleName: 'cardShow',
-        props: { pkId },
-        queryConfig: { dehydratedState, queryClient },
-      })
-    );
+    const page = await embed(CardShowPage, {
+      bundleName: 'cardShow',
+      props: { pkId },
+      queryConfig: { dehydratedState, queryClient },
+      apolloConfig: { apolloClient },
+    });
+    res.send(page);
   } catch (e) {
     l((e as Error).message, 'error');
     res.send(embed(Error500Page, { bundleName: '500' }));

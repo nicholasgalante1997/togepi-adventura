@@ -64,7 +64,7 @@ const CardInfoContainer = styled.div`
 const CardTitle = styled.h1<{ types: string[] }>`
   margin-block-start: 0.25rem;
   margin-block-end: 0.4rem;
-  text-shadow: 2px 2px ${(props) => getShadowColorOffType(props.types)};
+  text-shadow: 2px 2px #000000;
 `;
 
 const CardInfoItem = styled.p`
