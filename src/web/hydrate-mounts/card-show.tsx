@@ -1,14 +1,14 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { hydrateRoot } from 'react-dom/client';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { CardShowPage } from '../pages';
 
 const apolloClient = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
   cache:
     window && (window as typeof window & typeof globalThis & { __APOLLO_STATE__: string }).__APOLLO_STATE__
-      ? new InMemoryCache().restore((window as any).__APOLLO_STATE__ as any)
+      ? new InMemoryCache().restore((window as any).__APOLLO_STATE__)
       : new InMemoryCache(),
 });
 

@@ -1,12 +1,12 @@
 import styled, { keyframes } from 'styled-components';
-import { Color } from '../../styles/models';
+import { Color } from '@web/styles/models';
 
-export type BannerContainerProps = {
+export interface BannerContainerProps {
   textColor: string;
   backgroundColor: string;
   hoverColor: string;
   withAction?: boolean;
-};
+}
 
 export const BannerContainer = styled.div<BannerContainerProps>`
   height: 60px;

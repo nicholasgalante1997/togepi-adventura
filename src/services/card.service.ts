@@ -1,5 +1,5 @@
 import { TCGService } from './tcg.service';
-import { CARDS_ENDPOINT, Card } from '@nickgdev/larvitar-types';
+import { CARDS_ENDPOINT, type Card } from '@nickgdev/larvitar-types';
 
 class CardService extends TCGService {
   constructor() {
@@ -18,7 +18,7 @@ class CardService extends TCGService {
 
   public async getCards(queryObj?: { q: string }) {
     const { data, status, statusText } = await this.axiosInstance.get<{ data: Card[] } & Record<string, any>>(
-      queryObj ? `?${queryObj.q}` : ''
+      queryObj != null ? `?${queryObj.q}` : ''
     );
     if (status < 200 || status > 299) {
       console.warn('[WARN]: Request failed with issue code ' + status + '\n' + statusText);

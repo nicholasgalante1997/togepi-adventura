@@ -1,29 +1,43 @@
-import { Card } from '@nickgdev/larvitar-types';
+import { type Card } from '@nickgdev/larvitar-types';
 import React from 'react';
 import {
   BannerContainer,
+  CardActionButton,
+  CardActionContainer,
   CardImage,
   CardImageContainer,
   CardInfoContainer,
   CardTitle,
   SetImage,
   SetImageContainer,
-  CardActionButton,
-  CardActionContainer,
 } from './views';
 
-export function CardShowBanner(props: { card: Card }) {
+export interface CardShowBannerProps {
+  images?: {
+    large?: null | string;
+    small?: null | string;
+  } | null;
+  name?: null | string;
+  number?: null | string;
+  set?: {
+    images?: {
+      logo?: string | null;
+    } | null;
+  } | null;
+}
+
+export function CardShowBanner({ images, name, number, set }: CardShowBannerProps) {
   return (
     <BannerContainer>
       <CardImageContainer>
-        <CardImage src={props.card.images.large} />
+        <CardImage src={images?.large ?? ''} />
       </CardImageContainer>
       <CardInfoContainer>
         <SetImageContainer>
-          <SetImage zIndex={0} src={props.card.set.images.logo} />
+          <SetImage zIndex={0} src={set?.images?.logo ?? ''} />
         </SetImageContainer>
-        <CardTitle types={[...props.card.types, ...(props.card.subtypes ? props.card.subtypes : [])]}>
-          {props.card.number}. {props.card.name}
+        <CardTitle>
+          {number}. {name}
         </CardTitle>
         <CardActionContainer>
           <CardActionButton color="black" textColor="white">

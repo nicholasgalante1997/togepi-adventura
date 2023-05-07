@@ -1,7 +1,7 @@
 import React from 'react';
-import { DeckGenPageContainer, DeckGenInput, DeckGenInputContainer, DeckGenButton, ChatGPTBannerDisclaimer } from './views';
+import { ChatGPTBannerDisclaimer, DeckGenButton, DeckGenInput, DeckGenInputContainer, DeckGenPageContainer } from './views';
 import { PokeBall } from './loading-screen';
-import { deckBuilderService, DeckBuilderService } from '../../../services';
+import { DeckBuilderService, deckBuilderService } from '../../../services';
 import ReactMarkdown from 'react-markdown';
 
 export function DeckGeneratorPageComponent() {
@@ -98,9 +98,21 @@ export function DeckGeneratorPageComponent() {
         </div>
         <DeckGenInputContainer>
           <label>Card (typically a pokemon)</label>
-          <DeckGenInput placeholder="'Pikachu V Trainer Gallery'" value={pokemonQuery} onChange={(e) => setPokemonQuery(e.target.value)} />
+          <DeckGenInput
+            placeholder="'Pikachu V Trainer Gallery'"
+            value={pokemonQuery}
+            onChange={(e) => {
+              setPokemonQuery(e.target.value);
+            }}
+          />
           <label>Set</label>
-          <DeckGenInput placeholder="'Lost Origin'" value={setQuery} onChange={(e) => setSetQuery(e.target.value)} />
+          <DeckGenInput
+            placeholder="'Lost Origin'"
+            value={setQuery}
+            onChange={(e) => {
+              setSetQuery(e.target.value);
+            }}
+          />
         </DeckGenInputContainer>
         <div style={{ marginTop: '16px' }}>
           <DeckGenButton onClick={queryDeckBuilder}>Build Deck</DeckGenButton>

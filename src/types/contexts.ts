@@ -1,6 +1,6 @@
-import { User } from '@nickgdev/larvitar-types';
+import { type User } from '@nickgdev/larvitar-types';
 
-export type UserContextType = {
+export interface UserContextType {
   user: User | undefined;
   dispatchStateChange: (u: User | undefined) => void;
-};
+}

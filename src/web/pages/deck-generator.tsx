@@ -1,8 +1,8 @@
-import React from 'react';
-import { LocalizedContextProvider } from '../contexts';
-import { FixedNav } from '../components/FixedNav';
 import { DeckGeneratorPageComponent } from '../components';
+import { FixedNav } from '../components/FixedNav';
 import { Footer } from '../components/Footer';
+import { LocalizedContextProvider } from '../contexts';
+import React from 'react';
 
 export function DeckBuilderPage() {
   return (

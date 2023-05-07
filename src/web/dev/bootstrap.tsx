@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { createRoot } from 'react-dom/client';
-import { QueryClientProvider, QueryClient } from 'react-query';
-import { LandingPage, CardSearchPage, CardShowPage, DeckBuilderPage, Error404Page, Error500Page } from '../pages';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { CardSearchPage, CardShowPage, DeckBuilderPage, Error404Page, Error500Page, LandingPage, MemoizedLandingPage } from '../pages';
 
 import { BrowserRouter, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
@@ -108,7 +108,7 @@ const mockCard = {
 const routes = [
   {
     path: '/',
-    component: <LandingPage />,
+    component: <MemoizedLandingPage serverConfig={{}} />,
   },
   {
     path: '/cards/search',
@@ -190,8 +190,19 @@ function App() {
         <ReactRouterCurrentRoute>
           React Router DOM /// Current Path is <span style={{ color: 'red' }}>{pathname}</span>
         </ReactRouterCurrentRoute>
-        <ReactRouterPathInput value={pathState} onChange={(e) => setPathState(e.target.value)} />
-        <ReactRouterPushButton onClick={() => push(pathState)}>Go</ReactRouterPushButton>
+        <ReactRouterPathInput
+          value={pathState}
+          onChange={(e) => {
+            setPathState(e.target.value);
+          }}
+        />
+        <ReactRouterPushButton
+          onClick={() => {
+            push(pathState);
+          }}
+        >
+          Go
+        </ReactRouterPushButton>
       </ReactRouterNavigationBar>
     </React.Fragment>
   );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ColorScale from 'color-scales';
-import { PokemonName, getPokemonPaletteByPokemonName } from '../../utils';
+import { type PokemonName, getPokemonPaletteByPokemonName } from '../../utils';
 
 export const FooterContainer = styled.div<{ pokemon: PokemonName }>`
   width: 100%;

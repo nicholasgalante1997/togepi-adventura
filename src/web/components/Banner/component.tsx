@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { BannerContainer, BannerContainerProps } from './views';
+import { BannerContainer, type BannerContainerProps } from './views';
 
 type BannerProps = BannerContainerProps & {
   children: React.ReactNode | JSX.Element;

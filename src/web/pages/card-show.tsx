@@ -1,45 +1,51 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-import { FixedNav } from '../components';
+import { gql, useQuery } from '@apollo/client';
 import { CardShowPageComponent } from '../components/CardShowPage';
+import { FixedNav } from '../components';
 import { Footer } from '../components/Footer';
-import { useCardShowPageProps } from '../react-query-hooks';
-import { QueryCardByIdQuery } from '../../__generated__/graphql';
+import { type QueryCardByIdQuery } from '@gql/types';
+import React from 'react';
 
-export type CardShowPageProps = { pkId: string };
+export interface CardShowPageProps {
+  pkId: string;
+}
 
 const GET_CARD_BY_ID = gql`
   query queryCardById($id: String!) {
     card(id: $id) {
       name
-      id
+      images {
+        large
+        small
+      }
+      number
       set {
-        name
+        images {
+          logo
+        }
       }
     }
   }
 `;
 
 export function CardShowPage(props: CardShowPageProps) {
-  const { data: propData, isLoading: propsLoading, isError: propsError } = useCardShowPageProps(props.pkId);
-  const { loading: gqlLoading, error: gqlError, data: gqlData } = useQuery<QueryCardByIdQuery>(GET_CARD_BY_ID, { variables: { id: props.pkId } });
+  const { loading, error, data } = useQuery<QueryCardByIdQuery>(GET_CARD_BY_ID, { variables: { id: props.pkId }, ssr: true });
 
-  if (propsError) {
+  if (error != null) {
     /** Start handling errors more targetedly */
     return <p>Error.</p>;
   }
 
-  if (propsLoading) {
+  if (loading) {
     return <p>loading...</p>;
   }
 
-  console.log({ gqlData });
-
   return (
-    <div className="page">
-      <FixedNav />
-      <CardShowPageComponent card={propData!} />
-      <Footer pokemon="togepi" />
-    </div>
+    data?.card != null && (
+      <div className="page">
+        <FixedNav />
+        <CardShowPageComponent images={data.card.images} name={data.card.name} number={data.card.number} set={data.card.set} />
+        <Footer pokemon="togepi" />
+      </div>
+    )
   );
 }

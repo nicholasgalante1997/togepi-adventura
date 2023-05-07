@@ -1,9 +1,9 @@
 import React from 'react';
 import { ToggleContainer, ToggleSpan } from './views';
 
-type ArrowSvgProps = {
+interface ArrowSvgProps {
   d: 'up' | 'down';
-};
+}
 
 const ArrowSvg = (props: ArrowSvgProps) => {
   let className = '';

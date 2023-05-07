@@ -29,9 +29,9 @@ export function SearchIcon() {
       viewBox="0 0 24 24"
       fill="#000000"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="feather feather-search"
     >
       <circle cx="11" cy="11" r="8"></circle>

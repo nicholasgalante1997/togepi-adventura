@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 
-import { trace, userAgent, locale, marketplace } from './middleware';
+import { locale, marketplace, trace, userAgent } from './middleware';
 import { ROUTING_HANDLER_MAP } from './route-handlers';
 
 const expressServer = express();

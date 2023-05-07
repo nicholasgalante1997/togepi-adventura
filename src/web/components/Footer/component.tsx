@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPokemonPaletteByPokemonName, PokemonName } from '../../utils';
+import { type PokemonName, getPokemonPaletteByPokemonName } from '../../utils';
 import { FooterContainer, FooterLinkContainer, FooterPokemonContainer, Link, LinkSilo, PokemonImage } from './views';
 
 const pokemonImageMap: Record<PokemonName, string> = {

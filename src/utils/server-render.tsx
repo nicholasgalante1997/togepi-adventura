@@ -9,20 +9,20 @@
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-import { ApolloClient, ApolloProvider } from '@apollo/client';
+import { Hydrate, type QueryClient, QueryClientProvider } from 'react-query';
+import { type ApolloClient, ApolloProvider } from '@apollo/client';
 import { renderToStringWithData } from '@apollo/client/react/ssr';
 import { ServerStyleSheet } from 'styled-components';
 import path from 'path';
 import fs from 'fs';
 import { l } from './log';
 
-export type HeadTagConfig = {
+export interface HeadTagConfig {
   content: string;
   name: string;
-};
+}
 
-export type EmbedOptions = {
+export interface EmbedOptions {
   bundleName: string;
   headTags?: HeadTagConfig[];
   queryConfig?: {
@@ -33,7 +33,7 @@ export type EmbedOptions = {
     apolloClient: ApolloClient<any>;
   };
   props?: Record<string, any>;
-};
+}
 
 function withQueryClient(
   config: {
@@ -65,11 +65,11 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     html = fs.readFileSync(path.resolve(process.cwd(), 'html', 'prod.template.html'), { encoding: 'utf-8' });
 
     l('Setting up reactNode for dehydration...');
-    let reactNode: JSX.Element = <Component {...(options.props ? options.props : {})} />;
-    if (options.queryConfig) {
+    let reactNode: JSX.Element = <Component {...(options.props != null ? options.props : {})} />;
+    if (options.queryConfig != null) {
       reactNode = withQueryClient({ ...options.queryConfig }, reactNode);
     }
-    if (options.apolloConfig) {
+    if (options.apolloConfig != null) {
       reactNode = withApolloClientProvider({ ...options.apolloConfig }, reactNode);
       const graphQLHydratedPageString = await renderToStringWithData(reactNode);
       reactNode = <div id="apollo-hydration-container" dangerouslySetInnerHTML={{ __html: graphQLHydratedPageString }}></div>;
@@ -84,11 +84,11 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     error = e as Error;
     throw e;
   } finally {
-    l(`operation ended: status "${error ? 'failed' : 'successful'}"`, error ? 'error' : 'info');
+    l(`operation ended: status "${error != null ? 'failed' : 'successful'}"`, error != null ? 'error' : 'info');
     sheet.seal();
   }
 
-  if (options.headTags && options.headTags?.length > 0) {
+  if (options.headTags != null && options.headTags?.length > 0) {
     let metaTagString = '';
     for (const metaTag of options.headTags) {
       metaTagString += `<meta name="${metaTag.name}" content="${metaTag.content}">`;
@@ -98,7 +98,7 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     html = html.replace('<!-- __head_mount__ -->', '');
   }
 
-  if (options.props && Object.keys(options.props).length > 0) {
+  if (options.props != null && Object.keys(options.props).length > 0) {
     const componentStateElement = `<div id="component-state-mount">${JSON.stringify({ props: options.props }).replace(
       /</g,
       '\\u003c'
@@ -108,7 +108,7 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     html = html.replace('<!-- __data_state_mount__ -->', '');
   }
 
-  if (options.queryConfig && options.queryConfig.dehydratedState) {
+  if (options.queryConfig != null && options.queryConfig.dehydratedState) {
     const reactQueryScriptTag = `<script>window.__REACT_QUERY_STATE__ = ${JSON.stringify(options.queryConfig.dehydratedState).replace(
       /</g,
       '\\u003c'
@@ -118,9 +118,9 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     html = html.replace('<!-- __react_query_script_mount__ -->', '');
   }
 
-  if (options.apolloConfig) {
+  if (options.apolloConfig != null) {
     const apolloClientCache = options.apolloConfig.apolloClient.extract();
-    const apolloClientScriptTag = `<script>window.__APOLLO_STATE__=${JSON.stringify(apolloClientCache).replace(/</g, '\\u003c')}</script>;`;
+    const apolloClientScriptTag = `<script>window.__APOLLO_STATE__=${JSON.stringify(apolloClientCache).replace(/</g, '\\u003c')};</script>`;
     html = html.replace('<!-- __apollo_client_script_mount__ -->', apolloClientScriptTag);
   } else {
     html = html.replace('<!-- __apollo_client_script_mount__ -->', '');

@@ -1,11 +1,11 @@
-import { Card } from '@nickgdev/larvitar-types';
+import { type Card } from '@nickgdev/larvitar-types';
 import React from 'react';
 
-type CardSearchContextType = {
+interface CardSearchContextType {
   searchTerm?: string;
   mutateSearchTerm: React.ChangeEventHandler<HTMLInputElement>;
   visibleCards: Card[];
-};
+}
 
 const def = {
   mutateSearchTerm: function (e) {},
@@ -14,10 +14,10 @@ const def = {
 
 const CardSearchContext = React.createContext(def);
 
-type CardSearchProviderProps = {
+interface CardSearchProviderProps {
   cards: Card[];
   children?: React.ReactNode | JSX.Element;
-};
+}
 
 export const CardSearchProvider: React.FunctionComponent<CardSearchProviderProps> = (props) => {
   const [allCards, setAllCards] = React.useState(props.cards);

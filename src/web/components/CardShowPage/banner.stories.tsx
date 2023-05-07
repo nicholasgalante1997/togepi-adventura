@@ -1,7 +1,7 @@
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { type ComponentMeta, type ComponentStory } from '@storybook/react';
 import { CardShowBanner } from './banner.component';
-import { Card } from '@nickgdev/larvitar-types';
+import { type Card } from '@nickgdev/larvitar-types';
 
 export default {
   title: 'components/card page/card banner',

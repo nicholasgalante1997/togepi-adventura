@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 import styled from 'styled-components';
 
 export function withBoxShadowRaiseAnimation<P extends object = {}>(Component: React.ComponentType<P>) {

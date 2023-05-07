@@ -126,7 +126,6 @@ export type RootQueryType = {
   healthCheck?: Maybe<GqlHealthCheck>;
 };
 
-
 export type RootQueryTypeCardArgs = {
   id?: InputMaybe<Scalars['String']>;
 };
@@ -160,8 +159,75 @@ export type QueryCardByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
+export type QueryCardByIdQuery = {
+  __typename?: 'RootQueryType';
+  card?: {
+    __typename?: 'Card';
+    name?: string | null;
+    number?: string | null;
+    images?: { __typename?: 'Image'; large?: string | null; small?: string | null } | null;
+    set?: { __typename?: 'CardSet'; images?: { __typename?: 'SetImage'; logo?: string | null } | null } | null;
+  } | null;
+};
 
-export type QueryCardByIdQuery = { __typename?: 'RootQueryType', card?: { __typename?: 'Card', name?: string | null, id?: string | null, set?: { __typename?: 'CardSet', name?: string | null } | null } | null };
-
-
-export const QueryCardByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"queryCardById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"card"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"set"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<QueryCardByIdQuery, QueryCardByIdQueryVariables>;
+export const QueryCardByIdDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'queryCardById' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'card' },
+            arguments: [
+              { kind: 'Argument', name: { kind: 'Name', value: 'id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } } },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'images' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'large' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'small' } },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'number' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'set' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'images' },
+                        selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'logo' } }] },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<QueryCardByIdQuery, QueryCardByIdQueryVariables>;

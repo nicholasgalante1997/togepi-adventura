@@ -1,14 +1,14 @@
 import React from 'react';
 import { SearchIcon, StyledInput, StyledInputContainer } from './views';
 
-type InputProps = {
+interface InputProps {
   id?: string;
   value?: string;
   className?: string;
   onChangeHandler?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   withSearchIcon?: boolean;
-};
+}
 
 export function Input(props: InputProps) {
   const { value, placeholder, onChangeHandler, withSearchIcon = false, ...rest } = props;

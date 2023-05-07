@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Color } from '../../styles/models';
+import { Color } from '@web/styles/models';
 
 export const CardSearchPageContainer = styled.div`
   width: 100%;

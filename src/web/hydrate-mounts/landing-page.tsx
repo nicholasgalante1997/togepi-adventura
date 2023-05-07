@@ -1,21 +1,19 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
-import { hydrateRoot } from 'react-dom/client';
+import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { LandingPage } from '../pages';
-import { ServerConfig } from '../../types/server-props';
+import React from 'react';
+import { type ServerConfig } from '../../types/server-props';
+import { hydrateRoot } from 'react-dom/client';
 
 type ReactQueryExtendedWindow = typeof window & typeof globalThis & { __REACT_QUERY_STATE__: string };
 
 function hydrateHomeMarketplace() {
   const propStateElement = document.getElementById('component-state-mount');
-  console.log({ propStateElement });
   const componentPropString = propStateElement?.innerText;
   let propData: any;
   if (componentPropString) {
     propData = JSON.parse(componentPropString)?.props;
-    console.log(propData);
   }
-  if (propStateElement) {
+  if (propStateElement != null) {
     propStateElement.remove();
   }
   const dehydratedState = window && (window as ReactQueryExtendedWindow).__REACT_QUERY_STATE__;

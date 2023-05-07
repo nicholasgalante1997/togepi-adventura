@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  CardSearchPageContainer,
   CardSearchButton,
   CardSearchInput,
+  CardSearchPageContainer,
   CardSearchUtilityBar,
   SearchBarContainer,
   SortBarContainer,
 } from './views';
-import { ToggleSort } from '../ToggleSort';
+import { ToggleSort } from '@web/components/ToggleSort';
 
 export function CardSearchPageComponent() {
   return (

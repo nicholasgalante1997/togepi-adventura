@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card } from '@nickgdev/larvitar-types';
-import { CardShowBanner } from './banner.component';
+import { type Card } from '@nickgdev/larvitar-types';
+import { CardShowBanner, type CardShowBannerProps } from './banner.component';
 
-export function CardShowPageComponent(props: { card: Card }) {
+export function CardShowPageComponent(props: CardShowBannerProps) {
   return (
     <div className="show-page-content-frame">
       <CardShowBanner {...props} />

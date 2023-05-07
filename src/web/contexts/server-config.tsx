@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServerConfig } from '../../types/server-props';
+import { type ServerConfig } from '../../types/server-props';
 
 const ServerConfigContext = React.createContext<ServerConfig>({});
 

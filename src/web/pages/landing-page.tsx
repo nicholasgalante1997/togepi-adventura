@@ -1,14 +1,15 @@
+import { LocalizedContextProvider, ServerConfigContextProvider, UserProvider } from '@web/contexts/index';
+import { FixedNav } from '@web/components/FixedNav';
+import { Footer } from '@web/components/Footer';
+import { LandingPageComponent } from '@web/components/LandingPage';
 import React from 'react';
-import { LandingPageComponent, LandingPageProps as LPComponentProps } from '../components/LandingPage';
-import { LocalizedContextProvider, ServerConfigContextProvider, UserProvider } from '../contexts';
-import { useQueryLandingPageProps } from '../react-query-hooks';
-import { FixedNav } from '../components/FixedNav';
-import { Footer } from '../components/Footer';
-import { ServerConfig } from '../../types/server-props';
+import { type ServerConfig } from '@server/types/server-props';
+import { useQueryLandingPageProps } from '@web/react-query/hooks/index';
+import { withProfilerMetrics } from '@web/utils/profiler';
 
-type LandingPageProps = {
+interface LandingPageProps {
   serverConfig: ServerConfig;
-};
+}
 
 export function LandingPage(props: LandingPageProps) {
   const [serverConfig, setServerConfig] = React.useState(props.serverConfig);
@@ -16,20 +17,13 @@ export function LandingPage(props: LandingPageProps) {
     setServerConfig(props.serverConfig);
   }, [props.serverConfig]);
 
-  const { data, isLoading, isError, error } = useQueryLandingPageProps();
+  const { data, isLoading, isError } = useQueryLandingPageProps();
 
-  if (isLoading) {
-    return (
-      <div className="page landing-page">
-        <p>loading...</p>
-      </div>
-    );
-  }
-
-  if (isError || error) {
+  if (isError || (!isLoading && data == null)) {
     if (typeof window !== 'undefined') {
       window.location.assign('/500');
     }
+    return null;
   }
 
   return (
@@ -39,7 +33,8 @@ export function LandingPage(props: LandingPageProps) {
           <ServerConfigContextProvider {...serverConfig}>
             <div className="page landing-page">
               <FixedNav />
-              <LandingPageComponent {...data!} />
+              {data != null && <LandingPageComponent {...data} />}
+              {data == null && isLoading && <p>Loading...</p>}
               <Footer pokemon="totodile" />
             </div>
           </ServerConfigContextProvider>
@@ -48,3 +43,5 @@ export function LandingPage(props: LandingPageProps) {
     </React.StrictMode>
   );
 }
+
+export const MemoizedLandingPage = React.memo(withProfilerMetrics<LandingPageProps>('togepi-landing-page', LandingPage));

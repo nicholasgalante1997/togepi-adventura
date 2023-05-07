@@ -1,7 +1,7 @@
 export type PokemonName = 'gengar' | 'porygon' | 'growlithe' | 'typhlosion' | 'togepi' | 'rayquaza' | 'totodile';
 
 export function getPokemonPaletteByPokemonName(pokemon: PokemonName) {
-  const pokemonColorMap: Record<PokemonName, { [x: string]: string }> = {
+  const pokemonColorMap: Record<PokemonName, Record<string, string>> = {
     gengar: {
       backgroundColor: '#5a4a9c',
       primaryTextColor: '#fff6ff',

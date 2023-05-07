@@ -3,22 +3,22 @@ import {
   Button,
   ButtonContainer,
   CallToActionContainer,
+  CardContainer,
+  CardImage,
   LPContainer,
   LPTrainerPokemonImage,
   LPTrainerPokemonImageContainer,
+  LinkWrapper,
   Subtitle,
+  TextContainer,
   Title,
   WidgetTwoContainer,
-  CardContainer,
-  TextContainer,
-  CardImage,
-  LinkWrapper,
 } from './views';
 import { Banner } from '../Banner';
 import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
 import { HeroImageCarousel } from '../HeroCarousel';
 import { getAsset, getString } from '../../contexts';
-import { Card } from '@nickgdev/larvitar-types';
+import { type Card } from '@nickgdev/larvitar-types';
 import { Color } from '../../styles/models';
 
 const PAGE_PREFIX = 'landingPage' as const;
@@ -39,13 +39,13 @@ function ImageLink(props: { href: string; imageSrc: string; imageAlt: string; cl
   );
 }
 
-export type LandingPageProps = {
+export interface LandingPageProps {
   layout: {
     banner: {
-      cards: Pick<Card, 'images' | 'name' | 'id' | 'set'>[];
+      cards: Array<Pick<Card, 'images' | 'name' | 'id' | 'set'>>;
     };
   };
-};
+}
 
 export function LandingPageComponent(props: LandingPageProps) {
   const titleOrUndefined = getString(PAGE_PREFIX + '_title');

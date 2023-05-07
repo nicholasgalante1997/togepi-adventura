@@ -1,5 +1,5 @@
 import { cardService } from '../services/card.service';
-import { LandingPageProps } from '../web/components/LandingPage';
+import { type LandingPageProps } from '../web/components/LandingPage';
 
 const bannerCardIds = ['sv1-251', 'sv1-244', 'sv1-248'] as const;
 

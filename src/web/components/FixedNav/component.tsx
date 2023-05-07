@@ -4,19 +4,19 @@ import { Input } from '../Input';
 import { HamburgerMenuIcon } from './hamburger-menu.icon';
 import { NavOverlay } from './overlay';
 import {
-  ModernNavContainer,
+  LocalizedTabHeading,
+  LocalizedTabLink,
+  LocalizedTabOverlay,
   LogoBox,
   LogoCircleColorBackdrop,
   LogoContainer,
   LogoText,
-  TabContainer,
-  TabText,
+  ModernNavContainer,
   SearchBarContainer,
   SearchLabel,
   SnapRightContainer,
-  LocalizedTabOverlay,
-  LocalizedTabHeading,
-  LocalizedTabLink,
+  TabContainer,
+  TabText,
 } from './views';
 
 export type ServiceTab = 'grade' | 'sell' | 'search cards' | 'deck builder';
@@ -28,7 +28,15 @@ const COMPONENT_PREFIX = 'desktopNavBar' as const;
 export function MobileFixedNav() {
   const [visible, setVisible] = React.useState(false);
   return (
-    <div onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)} className="fixed-nav">
+    <div
+      onMouseEnter={() => {
+        setVisible(true);
+      }}
+      onMouseLeave={() => {
+        setVisible(false);
+      }}
+      className="fixed-nav"
+    >
       <HamburgerMenuIcon />
       <NavOverlay visible={visible} />
     </div>
@@ -168,9 +176,9 @@ export function FixedNav() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-user"
           >
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -200,9 +208,9 @@ export function FixedNav() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="feather feather-shopping-cart"
           >
             <circle cx="9" cy="21" r="1"></circle>

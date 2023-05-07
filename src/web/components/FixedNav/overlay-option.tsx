@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayOption, OverlayOptionSubtext } from './views';
 
-import { ServiceTab, serviceTabs } from './component';
+import { type ServiceTab, serviceTabs } from './component';
 import { titleCase } from '../../utils';
 
 const optionsSubtextMap: Record<ServiceTab, string> = {
@@ -23,7 +23,14 @@ export function OptionsSection() {
   return (
     <div>
       {serviceTabs.map((tab) => (
-        <div onMouseEnter={() => setActiveTab(tab)} onMouseLeave={() => setActiveTab(undefined)}>
+        <div
+          onMouseEnter={() => {
+            setActiveTab(tab);
+          }}
+          onMouseLeave={() => {
+            setActiveTab(undefined);
+          }}
+        >
           <OverlayOption href={optionsNavigationMap[tab]} target="_self" focus={activeTab === tab}>
             {titleCase(tab)}
           </OverlayOption>

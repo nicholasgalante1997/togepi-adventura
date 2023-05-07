@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { type Request, type Response } from 'express';
 import { embed, l } from '../../utils';
 import { CardSearchPage } from '../../web/pages';
 

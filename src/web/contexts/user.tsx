@@ -1,6 +1,6 @@
-import { User } from '@nickgdev/larvitar-types';
+import { type User } from '@nickgdev/larvitar-types';
 import React from 'react';
-import { UserContextType } from '../../types';
+import { type UserContextType } from '../../types';
 
 const defaultContext: UserContextType = {
   user: undefined,

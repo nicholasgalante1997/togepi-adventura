@@ -1,18 +1,18 @@
+import { Color } from '@web/styles/models';
 import React from 'react';
 import styled from 'styled-components';
-import { getShadowColorOffType } from '../../utils';
 
 const BannerContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 400px;
   width: 100%;
-  max-width: 1024px;
-  margin: 0 auto;
+  margin: 0px;
   padding: 16px;
   box-sizing: border-box;
   justify-content: flex-start;
   align-items: center;
+  background-color: ${Color.Tint100};
 `;
 
 const CardImageContainer = styled.div`
@@ -25,16 +25,10 @@ const CardImageContainer = styled.div`
 `;
 
 const CardImage = styled.img`
-  height: 280px;
+  height: 360px;
   width: auto;
   object-fit: cover;
-  cursor: pointer;
   border-radius: 10px;
-  &:hover {
-    height: 360px;
-    transition: height 400ms;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.88);
-  }
 `;
 
 const SetImageContainer = styled.div`
@@ -61,15 +55,18 @@ const CardInfoContainer = styled.div`
   padding-left: 32px;
 `;
 
-const CardTitle = styled.h1<{ types: string[] }>`
+const CardTitle = styled.h1`
+  font-family: 'Raleway', serif;
   margin-block-start: 0.25rem;
   margin-block-end: 0.4rem;
-  text-shadow: 2px 2px #000000;
+  color: ${Color.Text};
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
 `;
 
 const CardInfoItem = styled.p`
   margin-block-start: 0.25rem;
   margin-block-end: 0.25rem;
+  color: ${Color.Text};
 `;
 
 const CardActionContainer = styled.div`

@@ -1,8 +1,8 @@
-import React from 'react';
-import { LocalizedContextProvider } from '../contexts';
+import { CardSearchPageComponent } from '../components/CardSearchPage';
 import { FixedNav } from '../components/FixedNav';
 import { Footer } from '../components/Footer';
-import { CardSearchPageComponent } from '../components/CardSearchPage';
+import { LocalizedContextProvider } from '../contexts';
+import React from 'react';
 
 export function CardSearchPage() {
   return (
