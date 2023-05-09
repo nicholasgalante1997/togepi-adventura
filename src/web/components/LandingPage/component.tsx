@@ -16,10 +16,12 @@ import {
 } from './views';
 import { Banner } from '../Banner';
 import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
-import { HeroImageCarousel } from '../HeroCarousel';
+import { withLazyComponent } from '../Loadable';
 import { getAsset, getString } from '../../contexts';
 import { type Card } from '@nickgdev/larvitar-types';
 import { Color } from '../../styles/models';
+import { HeroImage } from '../HeroImage/views';
+import { HeroCarouselProps } from '../HeroCarousel/component';
 
 const PAGE_PREFIX = 'landingPage' as const;
 
@@ -28,7 +30,7 @@ function Heading({ children, ...rest }: any) {
 }
 
 const FadeUpHeading = withFadeUpAnimation(Heading);
-
+const FadeUpActionBlock = withFadeUpAnimation(CallToActionContainer);
 const ImageWithBoxShadow = withBoxShadowRaiseAnimation(CardImage);
 
 function ImageLink(props: { href: string; imageSrc: string; imageAlt: string; className?: string }) {
@@ -38,6 +40,13 @@ function ImageLink(props: { href: string; imageSrc: string; imageAlt: string; cl
     </LinkWrapper>
   );
 }
+
+/** Lazy load expensive component render/hydration */
+const LazyHeroCarousel = withLazyComponent<HeroCarouselProps>(
+  React.lazy(() => import('@web/components/HeroCarousel').then(mod => ({ default: mod.HeroSectionCarousel }))),
+  <p>loading...</p>,
+  <b>error</b>
+)
 
 export interface LandingPageProps {
   layout: {
@@ -60,11 +69,11 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   function renderWidgetOne() {
     return (
-      <LPContainer>
+      <LPContainer className="enter-in">
         <LPTrainerPokemonImageContainer>
           <LPTrainerPokemonImage src={'/' + trainerImgAssetOrUndefined} alt="Pokemon Trainer w Pikachu" />
         </LPTrainerPokemonImageContainer>
-        <CallToActionContainer>
+        <FadeUpActionBlock>
           <Title>{titleOrUndefined}</Title>
           <Subtitle>{subtitleOrUndefined}</Subtitle>
           <ButtonContainer>
@@ -83,14 +92,14 @@ export function LandingPageComponent(props: LandingPageProps) {
             <Button>Shop Cards</Button>
             <Button>Claim Cards / Tokens</Button>
           </ButtonContainer>
-        </CallToActionContainer>
+        </FadeUpActionBlock>
       </LPContainer>
     );
   }
 
   function renderBanner() {
     return (
-      <Banner backgroundColor={Color.Tint600} textColor="white" hoverColor={Color.Tint200}>
+      <Banner backgroundColor={Color.Tint600} textColor="white" hoverColor={Color.Palette400}>
         <p>
           Check out the new{' '}
           <a href="/cards/search?q=set.name:sv1" target="_self">
@@ -103,7 +112,7 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   function renderWidgetTwo() {
     return (
-      <WidgetTwoContainer>
+      <WidgetTwoContainer className="enter-in">
         <TextContainer>
           <FadeUpHeading style={{ color: 'white' }}>Check Out the Hottest Singles in Scarlet and Violet</FadeUpHeading>
         </TextContainer>
@@ -116,12 +125,14 @@ export function LandingPageComponent(props: LandingPageProps) {
     );
   }
 
+  const items = [<HeroImage className="enter-in" src="/jungle.webp" alt="grovyle in a tree in the jungle." />];
+
   return (
     <React.Fragment>
-      <HeroImageCarousel />
-      {renderBanner()}
       {renderWidgetOne()}
+      {renderBanner()}
       {renderWidgetTwo()}
+      <LazyHeroCarousel items={items} />
     </React.Fragment>
   );
 }

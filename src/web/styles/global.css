@@ -119,3 +119,16 @@ div.ball {
 .flip {
   transform: rotate(180deg);
 }
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.enter-in {
+  animation: slide-in 0.3s ease-in 0 1 forwards;
+}

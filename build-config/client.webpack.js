@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
+const BundleStatsWebpackPlugin = require('bundle-stats-webpack-plugin').BundleStatsWebpackPlugin;
 
 const { EnvironmentPlugin } = webpack;
 
@@ -114,5 +115,6 @@ module.exports = {
         process: 'process/browser',
       }),
       new EnvironmentPlugin({ ...process.env }),
+      new BundleStatsWebpackPlugin({ outDir: 'stats/webpack/client/bundles'})
     ],
 };

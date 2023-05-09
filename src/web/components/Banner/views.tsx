@@ -37,11 +37,11 @@ export const BannerContainer = styled.div<BannerContainerProps>`
       display: inline-block;
       cursor: pointer;
       margin-left: 8px;
-      color: ${Color.Tint100};
+      color: ${Color.Palette300};
 
       &:hover {
         font-size: 18px;
-        color: ${(props) => props.hoverColor};
+        color: ${(props) => props.hoverColor ?? Color.Palette400};
       }
     }
 

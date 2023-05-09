@@ -57,14 +57,15 @@ export const CallToActionContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: ${getPokemonPaletteByPokemonName('totodile').starkContrastOffset};
+  color: ${Color.Text};
+  text-shadow: 0px 0px 19.2px rgba(255, 255, 255, 0.75), 0px 0px 19.2px #523df1;
 `;
 
 export const Subtitle = styled.p`
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  font-variant: small-caps;
-  color: ${getPokemonPaletteByPokemonName('totodile').primaryTextColor};
+  color: ${Color.Palette400};
 `;
 
 export const ButtonContainer = styled.div`
@@ -77,8 +78,8 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: ${getPokemonPaletteByPokemonName('totodile').starkContrastOffset};
-  color: black;
+  background-color: ${Color.Palette200};
+  color: ${Color.Text};
   border-radius: 6px;
   border: 1px solid black;
   height: 36px;
@@ -93,11 +94,9 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: ${new ColorScale(0, 100, [getPokemonPaletteByPokemonName('totodile').backgroundColor, '#000000'])
-      .getColor(30)
-      .toHexString()};
+    background-color: ${new ColorScale(0, 100, [Color.Palette200, '#ffffff']).getColor(30).toHexString()};
     color: #ffffff;
-    box-shadow: 2px 2px 6px rgb(0, 0, 0);
+    box-shadow: 0px 0px 8px rgb(255, 255, 255, 0.4);
   }
 
   &:active {
@@ -107,7 +106,7 @@ export const Button = styled.button`
 
 export const WidgetTwoContainer = styled.div`
   width: 100%;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;

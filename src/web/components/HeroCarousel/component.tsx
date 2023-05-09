@@ -1,17 +1,28 @@
 import React from 'react';
-import { HeroImage, HeroImageContainer, HeroSlideshowContainer, Title, TitleContainer, TitleContainerBlur } from './views';
+import { HeroSlideshowContainer, FixedCarouselMicroDisplay } from './views';
 
-export function HeroImageCarousel() {
+export type HeroCarouselProps = { items: JSX.Element[] };
+
+export function HeroSectionCarousel(props: HeroCarouselProps) {
+  const [imgIndex, setImgIndex] = React.useState(0);
+  function incrementHeroImage() {
+    setImgIndex((previousIndex) => {
+      if (previousIndex === props.items.length - 1) {
+        return 0;
+      } else {
+        const nextIndex = previousIndex + 1;
+        return nextIndex;
+      }
+    });
+  }
+  React.useEffect(() => {
+    const interval = setInterval(incrementHeroImage, 8000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <HeroSlideshowContainer>
-      <HeroImageContainer>
-        <HeroImage src="/jungle.jpg" />
-      </HeroImageContainer>
-      <TitleContainerBlur>
-        <TitleContainer>
-          <Title>Pokemon TCG Reaches New Heights</Title>
-        </TitleContainer>
-      </TitleContainerBlur>
+      {props.items.at(imgIndex)}
+      <FixedCarouselMicroDisplay />
     </HeroSlideshowContainer>
   );
 }

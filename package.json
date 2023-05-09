@@ -66,6 +66,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-styled-components": "^2.0.7",
+    "bundle-stats-webpack-plugin": "^4.3.4",
     "css-loader": "^6.7.3",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^34.0.1",
