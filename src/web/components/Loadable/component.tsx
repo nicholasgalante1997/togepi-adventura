@@ -29,10 +29,10 @@ class ErrorBoundary extends React.Component<LocalErrorBoundaryProps, LocalErrorB
 }
 
 export function withLazyComponent<P = {}>(
-    LazyComponent: React.LazyExoticComponent<any>,
-    loadingJsx?: React.ReactNode,
-    errorJsx?: React.ReactNode,
-    failSilently: boolean = false,
+  LazyComponent: React.LazyExoticComponent<any>,
+  loadingJsx?: React.ReactNode,
+  errorJsx?: React.ReactNode,
+  failSilently: boolean = false
 ) {
   return function (props: P) {
     return (

@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+  '\n    query getItemCardDataById($id: String!) {\n        card(id: $id) {\n            name\n            number\n            images {\n                large\n            }\n            set {\n                name\n                printedTotal\n                id\n                images {\n                    logo\n                }\n            }\n        }\n    }\n':
+    types.GetItemCardDataByIdDocument,
   '\n  query queryCardById($id: String!) {\n    card(id: $id) {\n      name\n      images {\n        large\n        small\n      }\n      number\n      set {\n        images {\n          logo\n        }\n      }\n    }\n  }\n':
     types.QueryCardByIdDocument,
 };
@@ -31,6 +33,12 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: '\n    query getItemCardDataById($id: String!) {\n        card(id: $id) {\n            name\n            number\n            images {\n                large\n            }\n            set {\n                name\n                printedTotal\n                id\n                images {\n                    logo\n                }\n            }\n        }\n    }\n'
+): (typeof documents)['\n    query getItemCardDataById($id: String!) {\n        card(id: $id) {\n            name\n            number\n            images {\n                large\n            }\n            set {\n                name\n                printedTotal\n                id\n                images {\n                    logo\n                }\n            }\n        }\n    }\n'];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

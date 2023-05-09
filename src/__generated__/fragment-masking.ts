@@ -1,4 +1,4 @@
-import { type DocumentTypeDecoration, type ResultOf } from '@graphql-typed-document-node/core';
+import { ResultOf, DocumentTypeDecoration } from '@graphql-typed-document-node/core';
 
 export type FragmentType<TDocumentType extends DocumentTypeDecoration<any, any>> = TDocumentType extends DocumentTypeDecoration<
   infer TType,
@@ -25,12 +25,12 @@ export function useFragment<TType>(
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
   fragmentType: ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>
-): readonly TType[];
+): ReadonlyArray<TType>;
 // return array of nullable if `fragmentType` is array of nullable
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
   fragmentType: ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>> | null | undefined
-): readonly TType[] | null | undefined;
+): ReadonlyArray<TType> | null | undefined;
 export function useFragment<TType>(
   _documentNode: DocumentTypeDecoration<TType, any>,
   fragmentType:
@@ -38,7 +38,7 @@ export function useFragment<TType>(
     | ReadonlyArray<FragmentType<DocumentTypeDecoration<TType, any>>>
     | null
     | undefined
-): TType | readonly TType[] | null | undefined {
+): TType | ReadonlyArray<TType> | null | undefined {
   return fragmentType as any;
 }
 

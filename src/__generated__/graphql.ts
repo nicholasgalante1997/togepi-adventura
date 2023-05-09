@@ -155,6 +155,27 @@ export type Weakness = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type GetItemCardDataByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+export type GetItemCardDataByIdQuery = {
+  __typename?: 'RootQueryType';
+  card?: {
+    __typename?: 'Card';
+    name?: string | null;
+    number?: string | null;
+    images?: { __typename?: 'Image'; large?: string | null } | null;
+    set?: {
+      __typename?: 'CardSet';
+      name?: string | null;
+      printedTotal?: number | null;
+      id?: string | null;
+      images?: { __typename?: 'SetImage'; logo?: string | null } | null;
+    } | null;
+  } | null;
+};
+
 export type QueryCardByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -170,6 +191,64 @@ export type QueryCardByIdQuery = {
   } | null;
 };
 
+export const GetItemCardDataByIdDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'getItemCardDataById' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'card' },
+            arguments: [
+              { kind: 'Argument', name: { kind: 'Name', value: 'id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } } },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'number' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'images' },
+                  selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'large' } }] },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'set' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'printedTotal' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'images' },
+                        selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'logo' } }] },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetItemCardDataByIdQuery, GetItemCardDataByIdQueryVariables>;
 export const QueryCardByIdDocument = {
   kind: 'Document',
   definitions: [

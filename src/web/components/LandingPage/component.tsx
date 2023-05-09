@@ -43,10 +43,10 @@ function ImageLink(props: { href: string; imageSrc: string; imageAlt: string; cl
 
 /** Lazy load expensive component render/hydration */
 const LazyHeroCarousel = withLazyComponent<HeroCarouselProps>(
-  React.lazy(() => import('@web/components/HeroCarousel').then(mod => ({ default: mod.HeroSectionCarousel }))),
+  React.lazy(() => import('@web/components/HeroCarousel').then((mod) => ({ default: mod.HeroSectionCarousel }))),
   <p>loading...</p>,
   <b>error</b>
-)
+);
 
 export interface LandingPageProps {
   layout: {
