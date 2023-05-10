@@ -38,14 +38,22 @@ function cleanFilename(filename) {
 }
 
 function getEntryObject() {
+  /** Load pages from /hydrate-mounts directory */
     const dirContents = fs.readdirSync(path.resolve(process.cwd(), 'src', 'web', 'hydrate-mounts'), { encoding: 'utf-8' });
     if (dirContents.length < 1) {
         throw new Error('Could not read "hydrate-mounts" directory.')
     }
 
-    let entryObject = {};
+    /** Map files to entry objects */
+    let entryObject = {
+      'react-modules': ['react', 'react-dom'],
+      'style-modules': ['styled-components']
+    };
     for (const file of dirContents) {
-        entryObject[cleanFilename(file)] = path.resolve(process.cwd(), 'src', 'web', 'hydrate-mounts', file);
+        entryObject[cleanFilename(file)] = {
+          import: path.resolve(process.cwd(), 'src', 'web', 'hydrate-mounts', file),
+          dependOn: ['react-modules', 'style-modules']
+        }
     }
 
     return entryObject;
@@ -54,7 +62,10 @@ function getEntryObject() {
 module.exports = {
     mode: 'production',
     entry: getEntryObject(),
-    target: ['web', 'es2017'], // https://web.dev/publish-modern-javascript/?utm_source=lighthouse&utm_medium=devtools
+    optimization: {
+      runtimeChunk: 'single'
+    },
+    target: ['web', 'es2017'],
     output: {
         clean: true,
         path: path.resolve(process.cwd(), 'build', 'static'),
@@ -118,3 +129,10 @@ module.exports = {
       new BundleStatsWebpackPlugin({ outDir: 'stats/webpack/client/bundles'})
     ],
 };
+
+/**
+ * SECTION Related Links
+ * https://webpack.js.org/guides/code-splitting/#dynamic-imports (Chunking output for optimization)
+ * https://webpack.js.org/configuration/entry-context/#naming (Chunking shared deps in entry object)
+ * https://web.dev/publish-modern-javascript/?utm_source=lighthouse&utm_medium=devtools
+ */

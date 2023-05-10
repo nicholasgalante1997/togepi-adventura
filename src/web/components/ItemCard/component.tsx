@@ -2,6 +2,7 @@ import React from 'react';
 import { CardImage, CardImageContainer, ItemCardShell, CardTitle, ItemInfoContainer, SetImage } from './views';
 import { gql, useQuery } from '@apollo/client';
 import { GetItemCardDataByIdQuery, GetItemCardDataByIdQueryVariables } from '@gql/types';
+import { Placeholder } from '../Placeholder';
 
 interface ItemCardProps {
   cardId: string;
@@ -33,7 +34,11 @@ export function ItemCard(props: ItemCardProps) {
   });
 
   if (loading) {
-    return <ItemCardShell></ItemCardShell>;
+    return <ItemCardShell>
+      <CardImageContainer>
+          <Placeholder height="366px" width="220px" />
+        </CardImageContainer>
+    </ItemCardShell>;
   }
 
   if (error) {
@@ -49,7 +54,7 @@ export function ItemCard(props: ItemCardProps) {
         </CardImageContainer>
         <ItemInfoContainer>
           <CardTitle>
-            {data.card?.name}{' '}{data.card?.number}/{data.card?.set?.printedTotal}
+            {data.card?.name} {data.card?.number}/{data.card?.set?.printedTotal}
           </CardTitle>
           <SetImage src={data?.card?.set?.images?.logo ?? ''} />
         </ItemInfoContainer>

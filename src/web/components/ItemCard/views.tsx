@@ -37,7 +37,7 @@ export const ItemInfoContainer = styled.div`
   align-items: flex-start;
   margin-left: 20px;
   flex-wrap: wrap;
-`
+`;
 
 export const CardTitle = styled.h3`
   font-family: 'Raleway', serif;
@@ -45,13 +45,13 @@ export const CardTitle = styled.h3`
   font-weight: 600;
   text-align: left;
   color: ${Color.Text};
-  text-shadow:  0px 0px 19.2px rgba(255, 255, 255, 0.75), 0px 0px 19.2px #523df1;
+  text-shadow: 0px 0px 19.2px rgba(255, 255, 255, 0.75), 0px 0px 19.2px #523df1;
   max-width: 90%;
-`
+`;
 
 export const SetImage = styled.img`
   height: 60px;
   width: auto;
   margin-top: 10px;
   object-fit: cover;
-`
+`;
