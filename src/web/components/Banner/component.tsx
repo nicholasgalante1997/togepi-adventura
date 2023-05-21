@@ -1,7 +1,6 @@
 import React from 'react';
-import { BannerContainer, type BannerContainerProps } from './views';
 
-type BannerProps = BannerContainerProps & {
+type BannerProps = {
   children: React.ReactNode | JSX.Element;
   bannerBuddy?: 'eevee';
 };
@@ -16,9 +15,14 @@ export function Banner(props: BannerProps) {
   }
 
   return (
-    <BannerContainer backgroundColor={props.backgroundColor} hoverColor={props.hoverColor} textColor={props.textColor}>
+    <div className="banner__container">
       {props.children}
       {props.bannerBuddy && renderBannerBuddy()}
-    </BannerContainer>
+    </div>
   );
 }
+
+/**
+ * @addendum
+ * > COORDINATE STYLESHEET <src/styles/components/Banner.css>
+ */

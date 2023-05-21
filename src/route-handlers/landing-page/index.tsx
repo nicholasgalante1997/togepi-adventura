@@ -17,6 +17,7 @@ export async function landingPageRouteHandler(req: Request, res: Response) {
     bundleName: 'landingPage',
     queryConfig: { dehydratedState, queryClient },
     props: { serverConfig: { userAgent, marketplace, locale } },
+    stylesheet: 'home',
   });
   res.send(page);
   queryClient.clear();

@@ -1,0 +1,21 @@
+import React, { memo } from 'react';
+import { withProfilerMetrics } from '@web/utils/profiler';
+
+interface {{componentName}}Props {
+    {{#if withProps}}
+    {{#each props}}
+    {{this.name}}: {{this.type}};
+    {{/each}}
+    {{/if}}
+}
+
+function {{componentName}}Component (props: {{componentName}}Props) {
+    {{#if withState}}
+    {{#each state}}
+        const [{{this.state}}, {{this.setState}}] = React.useState();
+    {{/each}}
+    {{/if}}
+    return null;
+}
+
+export const {{componentName}} = memo(withProfilerMetrics<{{componentName}}Props>('{{componentProfilerId}}', {{componentName}}Component));

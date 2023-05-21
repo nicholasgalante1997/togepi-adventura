@@ -1,0 +1,40 @@
+@import "../vars.css";
+
+.banner__container {
+    height: 60px;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    box-sizing: border-box;
+    padding: 4px;
+    color: var(--base-text-color);
+    background-color: var(--base-palette-tint-800);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 16px;
+    text-align: center;
+}
+
+.banner__container > p {
+    margin-left: 6px;
+    font-size: 16px;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.banner__container > p > a {
+    font-size: 16px;
+    line-height: 1.15;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 8px;
+    color: var(--base-palette-tint-300);
+}
+
+.banner__container > p > a:hover {
+    font-size: 18px;
+    color: var(--base-palette-tint-400);
+}

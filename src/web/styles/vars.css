@@ -1,0 +1,18 @@
+:root {
+    --base-palette-hex: #090719;
+    --base-palette-tint-100: #090719;
+    --base-palette-tint-200: #130E33;
+    --base-palette-tint-300: #1C164D;
+    --base-palette-tint-400: #261D68;
+    --base-palette-tint-500: #302583;
+    --base-palette-tint-600: #3A2C9D;
+    --base-palette-tint-700: #4334B8;
+    --base-palette-tint-800: #5444CA;
+    --base-palette-tint-900: #6C5FD2;
+    --base-palette-tint-max: #8579D9;
+    --base-palette-accent-100: #1e1b3f;
+    --base-palette-accent-200: #47406b;
+    --base-palette-accent-300: #65d8d6;
+    --base-palette-accent-400: #99ffef;
+    --base-text-color: white;
+}

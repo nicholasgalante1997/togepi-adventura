@@ -26,6 +26,8 @@ Usage: yarn scaffold <type> <name> [...options|flags] | npm run scaffold <type> 
                 i.e. --withStyledComponents Header=div,Title=h1
                 generates > const Header = styled.div\`\`, Title = styled.h1\`\`;
             --withHooks [string] > comma separated string list of dependent hooks this component maintains
+            --withState > create local state variables, used in conjunction with --state
+            --state [string] > 
 
     hook <type>
         hook > generate a react hook directory and standard subfiles

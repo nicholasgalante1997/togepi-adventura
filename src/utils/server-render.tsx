@@ -17,6 +17,14 @@ import path from 'path';
 import fs from 'fs';
 import { l } from './log';
 
+const HEAD_TAG_MOUNT = '<!-- __head_mount__ -->' as const;
+const STYLE_TAG_MOUNT = '<!-- __style_mount__ -->' as const;
+const STYLESHEET_TAG_MOUNT = '<!-- __style_sheet_mount__ -->' as const;
+const REACT_QUERY_TAG_MOUNT = '<!-- __react_query_script_mount__ -->' as const;
+const APOLLO_CLIENT_TAG_MOUNT = '<!-- __apollo_client_script_mount__ -->' as const;
+const PROP_DRIVER_TAG_MOUNT = '<!-- __data_state_mount__ -->' as const;
+const CLIENT_JS_BUNDLE_TAG_MOUNT = '<!-- __client_js_mount__ -->' as const;
+
 export interface HeadTagConfig {
   content: string;
   name: string;
@@ -25,6 +33,7 @@ export interface HeadTagConfig {
 export interface EmbedOptions {
   bundleName: string;
   headTags?: HeadTagConfig[];
+  stylesheet?: string;
   queryConfig?: {
     queryClient: QueryClient;
     dehydratedState: any;
@@ -66,9 +75,11 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
 
     l('Setting up reactNode for dehydration...');
     let reactNode: JSX.Element = <Component {...(options.props != null ? options.props : {})} />;
+    
     if (options.queryConfig != null) {
       reactNode = withQueryClient({ ...options.queryConfig }, reactNode);
     }
+    
     if (options.apolloConfig != null) {
       reactNode = withApolloClientProvider({ ...options.apolloConfig }, reactNode);
       const graphQLHydratedPageString = await renderToStringWithData(reactNode);
@@ -78,7 +89,7 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     l('Dehydrating styled-components on server...');
     pageString = renderToString(sheet.collectStyles(reactNode));
     const styleTags = sheet.getStyleTags();
-    html = html.replace('<!-- __style_mount__ -->', styleTags);
+    html = html.replace(STYLE_TAG_MOUNT, styleTags);
   } catch (e: any) {
     l(e, 'error');
     error = e as Error;
@@ -93,9 +104,9 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
     for (const metaTag of options.headTags) {
       metaTagString += `<meta name="${metaTag.name}" content="${metaTag.content}">`;
     }
-    html = html.replace('<!-- __head_mount__ -->', metaTagString);
+    html = html.replace(HEAD_TAG_MOUNT, metaTagString);
   } else {
-    html = html.replace('<!-- __head_mount__ -->', '');
+    html = html.replace(HEAD_TAG_MOUNT, '');
   }
 
   if (options.props != null && Object.keys(options.props).length > 0) {
@@ -103,9 +114,9 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
       /</g,
       '\\u003c'
     )}</div>`;
-    html = html.replace('<!-- __data_state_mount__ -->', componentStateElement);
+    html = html.replace(PROP_DRIVER_TAG_MOUNT, componentStateElement);
   } else {
-    html = html.replace('<!-- __data_state_mount__ -->', '');
+    html = html.replace(PROP_DRIVER_TAG_MOUNT, '');
   }
 
   if (options.queryConfig != null && options.queryConfig.dehydratedState) {
@@ -113,17 +124,24 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
       /</g,
       '\\u003c'
     )};</script>`;
-    html = html.replace('<!-- __react_query_script_mount__ -->', reactQueryScriptTag);
+    html = html.replace(REACT_QUERY_TAG_MOUNT, reactQueryScriptTag);
   } else {
-    html = html.replace('<!-- __react_query_script_mount__ -->', '');
+    html = html.replace(REACT_QUERY_TAG_MOUNT, '');
   }
 
   if (options.apolloConfig != null) {
     const apolloClientCache = options.apolloConfig.apolloClient.extract();
     const apolloClientScriptTag = `<script>window.__APOLLO_STATE__=${JSON.stringify(apolloClientCache).replace(/</g, '\\u003c')};</script>`;
-    html = html.replace('<!-- __apollo_client_script_mount__ -->', apolloClientScriptTag);
+    html = html.replace(APOLLO_CLIENT_TAG_MOUNT, apolloClientScriptTag);
   } else {
-    html = html.replace('<!-- __apollo_client_script_mount__ -->', '');
+    html = html.replace(APOLLO_CLIENT_TAG_MOUNT, '');
+  }
+
+  if (options.stylesheet) {
+    const stylesheet = `<link rel="stylesheet" type="text/css" href="/pages/${options.stylesheet}.css">\n`;
+    html = html.replace(STYLESHEET_TAG_MOUNT, stylesheet);
+  } else {
+    html = html.replace(STYLESHEET_TAG_MOUNT, '');
   }
 
   const scriptTag = `<script src="/${options.bundleName}.bundle.js" defer></script>`;

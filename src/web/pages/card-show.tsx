@@ -39,13 +39,15 @@ export function CardShowPage(props: CardShowPageProps) {
     return <p>loading...</p>;
   }
 
-  return (
-    data?.card != null && (
+  if (data) {
+    return (
       <div className="page">
         <FixedNav />
-        <CardShowPageComponent images={data.card.images} name={data.card.name} number={data.card.number} set={data.card.set} />
+        <CardShowPageComponent images={data.card?.images} name={data.card?.name} number={data.card?.number} set={data.card?.set} />
         <Footer pokemon="togepi" />
       </div>
-    )
-  );
+    );
+  }
+
+  return null;
 }
