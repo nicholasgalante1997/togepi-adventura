@@ -45,15 +45,10 @@ function getEntryObject() {
     }
 
     /** Map files to entry objects */
-    let entryObject = {
-      'react-modules': ['react', 'react-dom'],
-      'style-modules': ['styled-components']
-    };
+    let entryObject = {};
+    
     for (const file of dirContents) {
-        entryObject[cleanFilename(file)] = {
-          import: path.resolve(process.cwd(), 'src', 'web', 'hydrate-mounts', file),
-          dependOn: ['react-modules', 'style-modules']
-        }
+      entryObject[cleanFilename(file)] =  path.resolve(process.cwd(), 'src', 'web', 'hydrate-mounts', file);
     }
 
     return entryObject;
@@ -62,9 +57,6 @@ function getEntryObject() {
 module.exports = {
     mode: 'production',
     entry: getEntryObject(),
-    optimization: {
-      runtimeChunk: 'single'
-    },
     target: ['web', 'es2017'],
     output: {
         clean: true,
