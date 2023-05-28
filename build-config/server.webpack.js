@@ -1,7 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 const BundleStatsWebpackPlugin = require('bundle-stats-webpack-plugin').BundleStatsWebpackPlugin;
 const { EnvironmentPlugin } = webpack;
+
+dotenv.config();
 
 module.exports = {
     entry: path.resolve(process.cwd(), 'src', 'index.ts'),
@@ -24,6 +27,7 @@ module.exports = {
           "@web/react-query/hooks": path.resolve(process.cwd(), "src", "web", "react-query-hooks"),
           "@web/styles": path.resolve(process.cwd(), "src", "web", "styles"),
           "@web/utils": path.resolve(process.cwd(), "src", "web", "utils"),
+          "@web/hooks": path.resolve(process.cwd(), "src", "web", "hooks"),
           "@gql/types$": path.resolve(process.cwd(), "src", "__generated__", "graphql.ts"),
           "@server/middleware": path.resolve(process.cwd(), "src", "middleware"),
           "@server/react-query/server": path.resolve(process.cwd(), "src", "react-query-server"),

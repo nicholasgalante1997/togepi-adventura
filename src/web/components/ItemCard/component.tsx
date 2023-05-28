@@ -34,11 +34,13 @@ export function ItemCard(props: ItemCardProps) {
   });
 
   if (loading) {
-    return <ItemCardShell>
-      <CardImageContainer>
+    return (
+      <ItemCardShell>
+        <CardImageContainer>
           <Placeholder height="366px" width="220px" />
         </CardImageContainer>
-    </ItemCardShell>;
+      </ItemCardShell>
+    );
   }
 
   if (error) {

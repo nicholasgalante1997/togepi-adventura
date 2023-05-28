@@ -10,10 +10,10 @@ const shimmer = keyframes`
 `;
 
 export const StyledPlaceholder = styled.div<{ height: string; width: string }>`
-  max-width: ${props => props.width};
-  width: ${props => props.width};
-  min-height: ${props => props.height};
-  height: ${props => props.height};
+  max-width: ${(props) => props.width};
+  width: ${(props) => props.width};
+  min-height: ${(props) => props.height};
+  height: ${(props) => props.height};
   background-color: #eeeeee;
   border-radius: 6px;
 
@@ -25,8 +25,8 @@ export const StyledPlaceholder = styled.div<{ height: string; width: string }>`
     animation-timing-function: linear;
     background: darkgray;
     background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
-    background-size: calc(${props => props.width} + 400px) calc(${props => props.height} + 10px);
-    height: ${props => props.height};
+    background-size: calc(${(props) => props.width} + 400px) calc(${(props) => props.height} + 10px);
+    height: ${(props) => props.height};
     position: relative;
   }
 `;

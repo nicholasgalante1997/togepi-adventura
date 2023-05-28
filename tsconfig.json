@@ -40,6 +40,7 @@
       "@web/react-query/hooks/*": ["./src/web/react-query-hooks/*"],
       "@web/styles/*": ["./src/web/styles/*"],
       "@web/utils/*": ["./src/web/utils/*"],
+      "@web/hooks/*": ["./src/web/hooks/*"],
       "@gql/types": ["./src/__generated__/graphql"],
       "@server/middleware/*": ["./src/middleware/*"],
       "@server/react-query/server/*": ["./src/react-query-server/*"],

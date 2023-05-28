@@ -99,7 +99,7 @@ export function LandingPageComponent(props: LandingPageProps) {
 
   function renderBanner() {
     return (
-      <Banner backgroundColor={Color.Tint600} textColor="white" hoverColor={Color.Palette400}>
+      <Banner>
         <p>
           Check out the new{' '}
           <a href="/cards/search?q=set.name:sv1" target="_self">

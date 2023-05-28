@@ -4,6 +4,10 @@ import { l } from '@server/utils/log';
 type LocalErrorBoundaryProps = { onErrorJsx?: React.ReactNode; failSilently?: boolean; children: React.ReactNode };
 type LocalErrorBoundaryState = { didError: boolean };
 
+// https://github.com/facebook/react/issues/24125#issuecomment-1073314294
+// we'll need to switch to renderToPipeableStream in server-render.tsx
+// can pipe(res) directly
+
 class ErrorBoundary extends React.Component<LocalErrorBoundaryProps, LocalErrorBoundaryState> {
   constructor(props: LocalErrorBoundaryProps) {
     super(props);

@@ -7,6 +7,10 @@
  * embeds the result of dehydrating the component into a mounting element within the
  */
 
+// https://github.com/facebook/react/issues/24125#issuecomment-1073314294
+// we'll need to switch to renderToPipeableStream in server-render.tsx
+// can pipe(res) directly
+
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Hydrate, type QueryClient, QueryClientProvider } from 'react-query';
@@ -75,11 +79,11 @@ export async function embed(Component: React.ComponentType<any>, options: EmbedO
 
     l('Setting up reactNode for dehydration...');
     let reactNode: JSX.Element = <Component {...(options.props != null ? options.props : {})} />;
-    
+
     if (options.queryConfig != null) {
       reactNode = withQueryClient({ ...options.queryConfig }, reactNode);
     }
-    
+
     if (options.apolloConfig != null) {
       reactNode = withApolloClientProvider({ ...options.apolloConfig }, reactNode);
       const graphQLHydratedPageString = await renderToStringWithData(reactNode);

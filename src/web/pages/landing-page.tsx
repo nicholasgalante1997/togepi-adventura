@@ -7,6 +7,7 @@ import { type ServerConfig } from '@server/types/server-props';
 import styled from 'styled-components';
 import { useQueryLandingPageProps } from '@web/react-query/hooks/index';
 import { withProfilerMetrics } from '@web/utils/profiler';
+import { useTrackComponentMount } from '@web/hooks/useOnMount';
 
 interface LandingPageProps {
   serverConfig: ServerConfig;
@@ -28,6 +29,8 @@ export function LandingPage(props: LandingPageProps) {
   }, [props.serverConfig]);
 
   const { data, isLoading, isError } = useQueryLandingPageProps();
+  
+  useTrackComponentMount('Togepi-Landing-Page');
 
   if (isError || (!isLoading && data == null)) {
     if (typeof window !== 'undefined') {

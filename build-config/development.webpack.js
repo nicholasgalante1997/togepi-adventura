@@ -58,6 +58,7 @@ module.exports = {
             "@web/react-query/hooks": path.resolve(process.cwd(), "src", "web", "react-query-hooks"),
             "@web/styles": path.resolve(process.cwd(), "src", "web", "styles"),
             "@web/utils": path.resolve(process.cwd(), "src", "web", "utils"),
+            "@web/hooks": path.resolve(process.cwd(), "src", "web", "hooks"), 
             "@gql/types$": path.resolve(process.cwd(), "src", "__generated__", "graphql.ts"),
             "@server/middleware": path.resolve(process.cwd(), "src", "middleware"),
             "@server/react-query/server": path.resolve(process.cwd(), "src", "react-query-server"),

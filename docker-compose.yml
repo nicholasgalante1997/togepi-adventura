@@ -1,0 +1,18 @@
+services:
+  togepi:
+    image: togepi-ui:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      - POKEMON_TCG_API_KEY=${POKEMON_TCG_API_KEY}  
+      - X_PIKACHU_API_KEY_HEADER=${X_PIKACHU_API_KEY_HEADER}
+      - TOGEPI_LOG_LEVEL=${TOGEPI_LOG_LEVEL}
+      - NODE_ENV=production
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    restart: always
+
