@@ -1,8 +1,8 @@
 export function titleCase(str: string | string[], delimiter: string = ''): string {
   if (Array.isArray(str)) {
-    return str.reduce((a, ns) => a + delimiter + ns.slice(0).toUpperCase() + ns.slice(1), '');
+    return str.reduce((a, ns) => a + delimiter + ns.slice(0, 1).toUpperCase() + ns.slice(1).toLowerCase(), '');
   } else {
-    return str.slice(0, 1).toUpperCase() + str.slice(1);
+    return str.slice(0, 1).toUpperCase() + str.slice(1).toLowerCase();
   }
 }
 

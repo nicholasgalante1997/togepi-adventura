@@ -21,5 +21,6 @@ expressServer.get('/', ROUTING_HANDLER_MAP.landingPage);
 expressServer.get('/cards/search', ROUTING_HANDLER_MAP.cardSearch);
 expressServer.get('/card/:pkId', ROUTING_HANDLER_MAP.cardShow);
 expressServer.get('/deck/builder', ROUTING_HANDLER_MAP.deckBuilder);
+expressServer.get('/registrar', ROUTING_HANDLER_MAP.auth);
 
 export const server = createServer(expressServer);

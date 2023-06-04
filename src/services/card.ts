@@ -1,4 +1,4 @@
-import { TCGService } from './tcg.service';
+import { TCGService } from './tcg';
 import { CARDS_ENDPOINT, type Card } from '@nickgdev/larvitar-types';
 
 class CardService extends TCGService {

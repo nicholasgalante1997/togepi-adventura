@@ -1,5 +1,5 @@
 import { type Card } from '@nickgdev/larvitar-types';
-import { cardService } from '../services/card.service';
+import { cardService } from '../services/card';
 
 export const CARD_SHOW_QUERY_KEY = 'card_show_' as const;
 

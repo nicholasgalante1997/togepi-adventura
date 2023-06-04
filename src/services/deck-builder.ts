@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TCGService } from './tcg.service';
+import { TCGService } from './tcg';
 
 const PIKACHU_DECK_GEN_MICROSERVICE_ENDPOINT = process.env.X_PIKACHU_API_HOSTING_URL ?? 'http://localhost:4001/d';
 

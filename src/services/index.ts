@@ -1,4 +1,4 @@
-export * from './card.service';
-export * from './tcg.service';
-export * from './deck-builder.service';
+export * from './card';
+export * from './tcg';
+export * from './deck-builder';
 export * from '../react-query-server/landing-page';

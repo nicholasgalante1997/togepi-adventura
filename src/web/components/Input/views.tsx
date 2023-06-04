@@ -1,7 +1,8 @@
+import { Color } from '@web/styles/models';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-export const StyledInputContainer = styled.div`
+export const StyledInputContainer = styled.div<{ inErrorState?: boolean; }>`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -10,9 +11,15 @@ export const StyledInputContainer = styled.div`
   border-radius: 8px;
   background-color: #ffffff;
   color: #000000;
+  border-color: ${props => props.inErrorState ? '1px solid red' : '1px solid black'};
   padding: 8px;
   &:hover {
     cursor: pointer;
+    border: 1px solid ${Color.Palette300};
+  }
+
+  &:focus {
+    border: 1px solid ${Color.Palette400};
   }
 
   &::placeholder {
@@ -64,3 +71,12 @@ export const StyledInput = styled.input<{ withSearchIcon?: boolean }>`
     color: rgba(0, 0, 0, 0.65);
   }
 `;
+
+export const ListItem = styled.li`
+    color: red;
+    line-height: 1.15;
+    font-size: 12px;
+    margin-block: 0.25rem;
+`;
+
+export const UList = styled.ul``

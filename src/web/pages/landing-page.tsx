@@ -29,7 +29,7 @@ export function LandingPage(props: LandingPageProps) {
   }, [props.serverConfig]);
 
   const { data, isLoading, isError } = useQueryLandingPageProps();
-  
+
   useTrackComponentMount('Togepi-Landing-Page');
 
   if (isError || (!isLoading && data == null)) {
