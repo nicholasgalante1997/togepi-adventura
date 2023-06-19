@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Email } from '@server/types/auth';
+import { logger } from '@server/utils/log';
 
 class AuthService {
   private static headers = {
@@ -15,9 +16,31 @@ class AuthService {
   }
   private static net = axios.create({ url: this.getUrl(), headers: this.headers });
 
-  public attemptSignUp(email: Email, password: string) {}
+  public async attemptSignUp(email: Email, password: string) {
+    try {
+      const { data, status } = await AuthService.net.post('users/create', { email, password });
+      if (status !== 201) {
+        throw new Error(JSON.stringify(data));
+      }
+      return data;
+    } catch(e: any) {
+      logger.error(e);
+      return null;
+    }
+  }
 
-  public attemptSignIn(email: Email, password: string) {}
+  public async attemptSignIn(email: Email, password: string) {
+    try {
+      const { data, status } = await AuthService.net.post('users/login', { email, password });
+      if (status !== 200) {
+        throw new Error(JSON.stringify(data));
+      }
+      return data;
+    } catch(e: any) {
+      logger.error(e);
+      return null;
+    }
+  }
 }
 
-export { AuthService };
+export const authService = new AuthService();

@@ -39,6 +39,8 @@ var logger = pino({
   },
 });
 
+export { logger };
+
 export function l(m: unknown, level: 'info' | 'warn' | 'error' | 'debug' | 'fatal' | 'silent' = 'info') {
   logger[level](m);
 }

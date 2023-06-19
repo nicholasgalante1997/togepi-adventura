@@ -19,7 +19,6 @@ import { withBoxShadowRaiseAnimation, withFadeUpAnimation } from '../HOCs';
 import { withLazyComponent } from '../Loadable';
 import { getAsset, getString } from '../../contexts';
 import { type Card } from '@nickgdev/larvitar-types';
-import { Color } from '../../styles/models';
 import { HeroImage } from '../HeroImage/views';
 import { HeroCarouselProps } from '../HeroCarousel/component';
 

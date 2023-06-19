@@ -24,6 +24,7 @@ export function validatePassword(password: string) {
   if (password.length < 8) return false;
   /** no numbers */
   if (!NumbersOnly.test(password)) return false;
+  console.log('in validate password getting here')
   /** no special characters */
   if (!SpecialChars.test(password)) return false;
   /** no capital letters */
