@@ -1,7 +1,12 @@
 import React from 'react';
 import { HeroSlideshowContainer, FixedCarouselMicroDisplay } from './views';
 
-export type HeroCarouselProps = { items: JSX.Element[] };
+export type HeroCarouselProps = { 
+  /** The visible element being rendered in HeroCarousel, we recommend <HeroImage /> */
+  items: JSX.Element[];
+  /** The delay in ms */
+  delay?: number;
+};
 
 export function HeroSectionCarousel(props: HeroCarouselProps) {
   const [imgIndex, setImgIndex] = React.useState(0);
@@ -16,7 +21,7 @@ export function HeroSectionCarousel(props: HeroCarouselProps) {
     });
   }
   React.useEffect(() => {
-    const interval = setInterval(incrementHeroImage, 8000);
+    const interval = setInterval(incrementHeroImage, props.delay ?? 8000);
     return () => clearInterval(interval);
   }, []);
   return (

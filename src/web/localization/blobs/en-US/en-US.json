@@ -10,6 +10,18 @@
         "value": "Shop Cards. Submit Cards for Grading. Build Decks. Collect Online Art. All In One Place.",
         "note": "Make this longer and more tailored to commerce."
       },
+      "landingPage_banner_check_out_this_drop": {
+        "value": "Check out the new",
+        "note": "this can be changed to anything that will draw traffic to the cards"
+      },
+      "landingPage_banner_link": {
+        "value": "Scarlet and Violet Card Drop!",
+        "note": "This value should be updated with new releases, which will require manual updates to UI"
+      },
+      "landingPage_highlight_cards_widget_title": {
+        "value": "Check Out the Hottest Singles in Scarlet and Violet",
+        "note": "This will also need to be updated with new releases"
+      },
       "desktopNavBar_logoText": {
         "value": "Local Card Shop",
         "note": "See above"

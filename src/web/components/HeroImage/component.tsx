@@ -1,16 +1,14 @@
-import React from 'react';
-import { HeroImage, HeroImageContainer } from './views';
+import React, { memo } from 'react';
+import { HeroImage as StyledHeroImage, HeroImageContainer } from './views';
+import { HeroImageComponentProps } from './types';
 
-interface HeroImageComponentProps {
-  src: string;
-  alt: string;
-  withLink?: string;
-}
 
-export function HeroImageComponent(props: HeroImageComponentProps) {
+function HeroImageComponent(props: HeroImageComponentProps) {
   return (
-    <HeroImageContainer>
-      <HeroImage alt={props.alt} src={props.src} />
+    <HeroImageContainer className={props.className} id={props.id}>
+      <StyledHeroImage alt={props.alt} src={props.src} />
     </HeroImageContainer>
   );
 }
+
+export const HeroImage = memo(HeroImageComponent);

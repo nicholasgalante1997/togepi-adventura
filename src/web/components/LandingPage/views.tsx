@@ -1,8 +1,7 @@
 import ColorScale from 'color-scales';
-import React from 'react';
 import styled from 'styled-components';
-import { getPokemonPaletteByPokemonName } from '../../utils';
 import { Color } from '../../styles/models';
+import { withFadeUpAnimation } from '../HOCs';
 
 export const LinkWrapper = styled.a`
   box-sizing: border-box;
@@ -142,3 +141,5 @@ export const CardImage = styled.img`
   object-position: center;
   border-radius: 10px;
 `;
+
+export const FadeUpActionBlock = withFadeUpAnimation(CallToActionContainer);
